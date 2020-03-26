@@ -1,0 +1,525 @@
+html,
+body
+{
+   margin:0;
+   padding:0;
+   height:100%;
+   font:12px Arial, Verdana, Tahoma;
+   text-align:center;
+   background: #ffffff;
+}
+#tudo
+{
+   min-height:100%;
+   position:relative;
+}
+#titulo h2
+{
+	font-size:14px;
+}
+#titulo .atual
+{
+	color:#090;
+}
+#topo
+{
+   width:941px;
+   height:100px;
+   margin:0 auto;
+}
+#topo_background
+{
+   height:100px;
+   margin:0 auto;
+   background:url(../imagens/background_cabecalho2.png);
+}
+#topo2
+{
+   height:100px;
+   margin:0 auto;
+}
+#topo2_background
+{
+   height:100px;
+   margin:0 auto;
+   background:url(../imagens/background_cabecalho2.png);
+}
+#conteudo
+{
+   width:auto;
+   height:auto;
+   margin-bottom:0px;
+   margin-left:auto;
+   margin-right:auto;
+   margin-top:15px;
+   background: #FFFFFF;
+   text-align:left;
+   padding:10px;
+   padding-left:0px;
+   padding-right:0px;	
+   padding-bottom:100px;/* tem que ser da Altura do Rodapé */
+   border: dashed 0px;
+   border-color:#DCDCDC;
+   -moz-border-radius:7px;
+   -webkit-border-radius:7px;
+   border-radius:4px;
+}
+#titulo
+{
+}
+#centro
+{
+   width:900px;
+   height:auto;
+   float:center;	
+   margin-bottom:100px;
+   margin-left:320px;
+   margin-right:0px;
+   margin-top:30px;
+   background: #FFFFFF;
+   text-align:left;
+   padding-left:10px;
+   padding-right:10px;
+   padding-bottom:10px;	
+   padding-top:0px;	
+   border: dashed 0px;
+   border-color:#DCDCDC;
+   -moz-border-radius:7px;
+   -webkit-border-radius:7px;
+   border-radius:4px;
+}
+#registros tr
+{
+	margin-right:30px;
+}
+#clientes
+{
+   width:auto;
+   height:auto;
+   text-align:left;	
+   margin-bottom:0px;
+   margin-left:auto;
+   margin-right:0px;
+   margin-top:5px;
+   background: #FFFFFF;
+   padding-left:130px;
+   padding-right:0px;
+   padding-bottom:10px;
+   padding-top:5px;	 	
+   border: dashed 0px;
+   border-color:#DCDCDC;
+   -moz-border-radius:7px;
+   -webkit-border-radius:7px;
+   border-radius:4px;
+}
+#clientes td
+{
+	padding-right:25px;
+}
+#operacoes
+{
+	/*float: left;*/
+}
+#operacoes ul
+{
+	margin-left:0px;
+	padding:0;
+	height:30px;
+}
+#operacoes li
+{
+	display:block;
+	float:left;
+    padding-left:0px;
+	margin-right:0px;
+}
+
+#pratos
+{
+	margin-left:auto;
+	border:0px dashed;
+}
+#pratos .dados
+{
+	text-align:left;
+	border:0px dashed;
+
+}
+#pratos .foto
+{
+	float:right;
+	margin-right:235px;
+	margin-top:-229px;
+}
+#restaurantes
+{
+	margin-left:auto;
+	margin-bottom:20px;
+	border:0px dashed;
+}
+#restaurantes .dados
+{
+	text-align:left;
+	margin-bottom:20px;
+	border:0px dashed;
+
+}
+#restaurantes .foto
+{
+	float:right;
+	margin-right:190px;
+	margin-top:-143px;
+}
+#restaurantes_2
+{
+	margin-left:auto;
+	margin-bottom:20px;
+	border:0px dashed;
+}
+#restaurantes_2 .dados
+{
+	text-align:left;
+	margin-bottom:20px;
+	border:0px dashed;
+
+}
+#restaurantes_2 .foto
+{
+	float:right;
+	margin-right:320px;
+	margin-top:-143px;
+}
+#formulario_login
+{
+   width: 266px;
+   height:auto 0px;
+   margin:auto;
+   text-align:left;
+   background:#FFFFFF;
+   border:1px solid #D3D3D3;
+   -moz-border-radius:7px;
+   -webkit-border-radius:7px;
+   border-radius:3px;
+}
+#formulario_login p
+{
+   font-size: 15px;
+   font-family : verdana,arial,helvetica;
+   color:#000000;
+   text-align:left;
+   margin-left:20px;
+   margin-bottom:5px;
+}
+#formulario_login input[type=text]
+{
+   width:220px;
+   margin-left:20px;
+   margin-bottom:4px;
+   padding:2px 2px 2px 2px;
+   border:1px solid #cccccc;
+   -moz-border-radius:7px;
+   -webkit-border-radius:7px;
+   border-radius:3px;
+}
+#formulario_login input[type=password]
+{
+   width:220px;
+   margin-left:20px;
+   margin-bottom:4px;
+   padding:2px 2px 2px 2px;
+   border:1px solid #cccccc;
+   -moz-border-radius:7px;
+   -webkit-border-radius:7px;
+   border-radius:3px;
+}
+#formulario_login select
+{
+   width:140px;
+   margin-left:20px;
+   margin-bottom:10px;
+   padding:2px 2px 2px 2px;
+   overflow: hidden;
+   font-size: 12px;
+   font-family : verdana,arial,helvetica;
+   color:#333;
+   border:1px solid #cccccc;
+   -moz-border-radius:7px;
+   -webkit-border-radius:7px;
+   border-radius:3px;
+}
+#formulario_login select:focus
+{
+   background-color:#F5F5F5;
+}
+#formulario_login select:hover
+{
+   background:# CCC;
+}
+#formulario_login input[type=submit]
+{
+  width: 100px;
+  margin-left:20px;
+  border: 1px solid #ggg;
+  padding:5px;
+  cursor:pointer;
+}
+#formulario_login .frase
+{
+	margin-left:20px;
+}
+#bloco_formulario_login
+{
+   width: 420px;
+   height:auto 0px;
+   margin:auto;
+   padding-top:10px;
+   padding-bottom:5px;
+   text-align:left;
+   background:#FFFFFF;
+   border:0px solid #D3D3D3;
+   -moz-border-radius:7px;
+   -webkit-border-radius:7px;
+   border-radius:4px;
+}
+#bloco_formulario_login h3
+{
+   font-size: 10px;
+   font-family : verdana,arial,helvetica;
+   color:#F00;
+   text-align:left;
+   margin-left:77px;
+}
+#formulario
+{
+   width: auto 0px;
+   height:auto 0px;
+   margin:auto;
+   float:center;
+   text-align:left;
+   background:#FFFFFF;
+   border:1px solid #D3D3D3;
+   -moz-border-radius:7px;
+   -webkit-border-radius:7px;
+   border-radius:4px;
+}
+#formulario p
+{
+   font-size: 15px;
+   font-family : verdana,arial,helvetica;
+   color:#000000;
+   text-align:left;
+   margin-left:20px;
+   margin-bottom:2px;
+}
+#formulario h3
+{
+   font-size: 10px;
+   font-family : verdana,arial,helvetica;
+   color:#F00;
+   text-align:left;
+   margin-left:20px;
+}
+#formulario input[type=text]
+{
+   width:220px;
+   margin-left:20px;
+   margin-bottom:2px;
+   padding:2px 2px 2px 2px;
+   border:1px solid #cccccc;
+   -moz-border-radius:7px;
+   -webkit-border-radius:7px;
+   border-radius:3px;
+}
+#formulario input[type=password]
+{
+   width:220px;
+   margin-left:20px;
+   margin-bottom:4px;
+   padding:2px 2px 2px 2px;
+   border:1px solid #cccccc;
+   -moz-border-radius:7px;
+   -webkit-border-radius:7px;
+   border-radius:3px;
+}
+#formulario input[type=file]
+{
+   width:220px;
+   margin-left:20px;
+   margin-bottom:4px;
+   padding:2px 2px 2px 2px;
+   border:0px solid #cccccc;
+   -moz-border-radius:7px;
+   -webkit-border-radius:7px;
+   border-radius:3px;
+}
+#formulario select
+{
+   width:227px;
+   margin-left:20px;
+   margin-bottom:10px;
+   padding:2px 2px 2px 2px;
+   overflow: hidden;
+   font-size: 12px;
+   font-family : verdana,arial,helvetica;
+   color:#333;
+   border:1px solid #cccccc;
+   -moz-border-radius:7px;
+   -webkit-border-radius:7px;
+   border-radius:3px;
+}
+#formulario select:focus
+{
+   background-color:#F5F5F5;
+}
+#formulario select:hover
+{
+   background:# CCC;
+}
+#formulario input[type=submit]
+{
+  width: 100px;
+  margin-left:20px;
+  border: 1px solid #ggg;
+  padding:5px;
+  cursor:pointer;
+}
+
+#bloco_formulario
+{
+   width: 420px;
+   height:auto 0px;
+   padding-top:10px;
+   margin-top:10px;
+   padding-bottom:5px;
+   text-align:center;
+   background:#FFFFFF;
+   border:0px solid #D3D3D3;
+   -moz-border-radius:7px;
+   -webkit-border-radius:7px;
+   border-radius:4px;
+}
+#bloco_formulario h3
+{
+   font-size: 10px;
+   font-family : verdana,arial,helvetica;
+   color:#F00;
+   text-align:left;
+   margin-left:77px;
+}
+#formulario_upload
+{
+   width: 380px;
+   height:auto 0px;
+   margin:auto;
+   padding-top:20px;
+   padding-bottom:20px;
+   float:center;
+   text-align:left;
+   background:#FFFFFF;
+   border:1px solid #D3D3D3;
+   -moz-border-radius:7px;
+   -webkit-border-radius:7px;
+   border-radius:4px;
+}
+#formulario_upload p
+{
+   font-size: 15px;
+   font-family : verdana,arial,helvetica;
+   color:#000000;
+   text-align:left;
+   margin-left:20px;
+   margin-bottom:2px;
+}
+#formulario_upload h3
+{
+   font-size: 10px;
+   font-family : verdana,arial,helvetica;
+   color:#F00;
+   text-align:left;
+   margin-left:20px;
+}
+#formulario_upload input[type=file]
+{
+   width:340px;
+   margin-left:20px;
+   margin-bottom:4px;
+   padding:2px 2px 2px 2px;
+   border:0px solid #cccccc;
+   -moz-border-radius:7px;
+   -webkit-border-radius:7px;
+   border-radius:3px;
+   cursor:pointer;
+}
+#formulario_upload input[type=submit]
+{
+  width: 100px;
+  margin-left:20px;
+  border: 1px solid #ggg;
+  padding:5px;
+  cursor:pointer;
+}
+#bloco_formulario_upload
+{
+   width: 420px;
+   height:auto 0px;
+   padding-top:10px;
+   margin-top:10px;
+   padding-bottom:5px;
+   text-align:center;
+   background:#FFFFFF;
+   border:0px solid #D3D3D3;
+   -moz-border-radius:7px;
+   -webkit-border-radius:7px;
+   border-radius:4px;
+}
+#bloco_formulario_upload h3
+{
+   font-size: 10px;
+   font-family : verdana,arial,helvetica;
+   color:#F00;
+   text-align:left;
+   margin-left:20px;
+}
+#rodape
+{
+   width:941px;
+   height:38px;
+   margin:0 auto;
+}
+#rodape .texto
+{
+  color:#334;
+}
+#rodape .texto a:link
+{
+   text-align: justify;
+   color: #2B889C;
+}
+#rodape .texto a:visited
+{
+   text-align: justify;
+   color: #2B889C;
+}
+#rodape .texto a:active
+{
+   text-align: justify;
+   color: #2B889C;
+}
+#rodape .texto a:hover
+{
+   text-align: justify;	
+   text-decoration: underline;
+   color: #06F;
+}
+#rodape_background
+{
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:100px;   /* Altura do Altura do Rodapé */
+   background:url(../imagens/background_rodape.png);
+}
+#divclear
+{
+   clear:both;
+}
