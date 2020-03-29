@@ -39,29 +39,43 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
+		$this->session->set_flashdata('atualizacao_positivo','');
+		$this->session->set_flashdata('atualizacao_negativo','');
 		$this->load->view('loginViews');
 	}
 
 	public function login(){
-		$dados = array('login_usuario' => $this->input->post('login_usuario'),
+		$dados_login = array('login_usuario' => $this->input->post('login_usuario'),
 			'senha_usuario' => $this->input->post('senha_usuario'));
 		//print_r($dados);
-		$verificar = $this->login_model->buscar_usuario($dados);
-		if ($verificar != true){
-			$retorno['retorno'] = 'Login ou senha incorretos!';
-			//print_r($retorno);
-			$this->load->view('loginViews', $retorno);
+		$dados['dados'] = $this->login_model->buscar_usuario($dados_login);
+		if ($dados['dados'] == false){
+			$this->session->set_flashdata('atualizacao_negativo','Login ou senha incorretos!');
+			$this->load->view('loginViews');
 		}else {
-			echo "login sucesso!";
+			$this->session->set_flashdata('atualizacao_negativo','');
+			$this->session->set_userdata( 'id' ,  $dados['dados']['id']);
+			$this->session->set_userdata( 'login' ,  $dados['dados']['login']);
+			$this->session->set_userdata( 'tipo_usuario_id' ,  $dados['dados']['tipo_usuario_id']);
+			//print_r($dados);
+			if ($dados['dados']['tipo_usuario_id'] == 1){
+
+				$dados['dados_pro'] = $this->login_model->perfil_profissional($dados['dados']['id']);
+
+				if (empty($dados['dados_pro'])){
+					$dados['dados_pro'] = 0;
+				}
+				//print_r($dados['dados_pro']);exit;
+				$this->load->view('admViews', $dados);
+			}else {
+				$this->load->view('pacienteViews', $dados);
+			}
 		}
 	}
 
 	public function CadastrarCliente(){
 		$this->load->view('cadastro_cliente');
 	}
-
-
-	
 
 	public function validarCadastro(){
 		$dados = array('nome' =>$this->input->post('cliente_nome'),
@@ -79,12 +93,97 @@ class Welcome extends CI_Controller {
 			'municipio' =>$this->input->post('cliente_municipio'),
 			'uf' =>$this->input->post('cliente_uf')
 		);
-		$retorno = $this->login_model->cadastrar_cliente($dados);
-		if ($retorno == true){
-			echo "sucesso";
+		$verificar = $this->login_model->cadastrar_cliente($dados);
+		if($verificar!=true)
+		{
+			$this->session->set_flashdata('atualizacao_negativo','Nao foi possivel atualizar os dados!');
+		}
+		else
+		{
+			$this->session->set_flashdata('atualizacao_positivo','Atualizacao dos dados realizada com sucesso!');
+		}
+
+		$this->load->view('cadastro_cliente');
+	}
+
+	public function editarperfil(){
+		if (!empty($this->input->post('cliente_nome'))){
+			$dados = array('nome' =>$this->input->post('cliente_nome'),
+				'sexo' =>$this->input->post('cliente_sexo'),
+				'nascimento' =>$this->input->post('cliente_nascimento'),
+				'celular' =>$this->input->post('cliente_celular'),
+				'login' =>$this->input->post('cliente_login'),
+				'senha' =>$this->input->post('cliente_senha'),
+				'email' =>$this->input->post('cliente_email'),
+				'cep' =>$this->input->post('cliente_cep'),
+				'logadrouro' =>$this->input->post('cliente_logadrouro'),
+				'numero' =>$this->input->post('cliente_numero'),
+				'complemento' =>$this->input->post('cliente_complemento'),
+				'bairro' =>$this->input->post('cliente_bairro'),
+				'municipio' =>$this->input->post('cliente_municipio'),
+				'uf' =>$this->input->post('cliente_uf')
+			);
+
+			$verificar = $this->login_model->editar_dados($dados);
+
+			if($verificar!=true)
+			{
+				$this->session->set_flashdata('atualizacao_negativo','Nao foi possivel atualizar os dados!');
+			}
+			else
+			{
+				$this->session->set_flashdata('atualizacao_positivo','Atualizacao dos dados realizada com sucesso!');
+			}
+		}
+		$dados['dados'] = $this->login_model->buscar_dados($this->session->userdata('id'));
+		//print_r($dados);
+		if ($dados['dados']['tipo_usuario_id'] == 1){
+			$this->load->view('editar_dados_profissional', $dados);
 		}else {
-			echo "falha";
+			$this->load->view('editar_dados_paciente', $dados);
 		}
 		
+	}
+
+	public function editarperfilprofissional(){
+
+		if (!empty($this->input->post('especialidade')) && $this->input->post('novo_perfil_pro') == 'F'){//Editando perfil profissional
+			$dados = array('especialidade' =>$this->input->post('especialidade'),
+				'experiencia' =>$this->input->post('experiencia'));
+
+			$verificar = $this->login_model->editar_dados_perfil_profissional($dados);
+
+			if($verificar!=true)
+			{
+				$this->session->set_flashdata('atualizacao_negativo','Nao foi possivel atualizar os dados!');
+			}
+			else
+			{
+				$this->session->set_flashdata('atualizacao_positivo','Atualizacao dos dados realizada com sucesso!');
+			}
+		}else if(!empty($this->input->post('especialidade')) && $this->input->post('novo_perfil_pro') == 'T') {//Adiciona novo perfil profissional
+			$dados = array('especialidade' =>$this->input->post('especialidade'),
+				'experiencia' =>$this->input->post('experiencia'));
+
+			$verificar = $this->login_model->adicionar_dados_perfil_profissional($dados);
+
+			if($verificar!=true)
+			{
+				$this->session->set_flashdata('atualizacao_negativo','Nao foi possivel adicionarr os dados!');
+			}
+			else
+			{
+				$this->session->set_flashdata('atualizacao_positivo','Dados adicionar com sucesso!');
+			}
+		}
+		
+		$dados['dados'] = $this->login_model->buscar_dados($this->session->userdata('id'));
+		$dados['dados_pro'] = $this->login_model->perfil_profissional($dados['dados']['id']);
+
+		if (empty($dados['dados_pro'])){
+			$dados['dados_pro'] = 0;
+		}
+				//print_r($dados['dados_pro']);exit;
+		$this->load->view('admViews', $dados);
 	}
 }

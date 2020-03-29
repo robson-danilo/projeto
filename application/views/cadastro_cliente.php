@@ -199,143 +199,154 @@ $estadosBrasileiros = array(
     							<div class="col-md-12 col-sm-12 col-xs-12">
     								<div class="x_panel">
     									<div class="x_content">
-    										<form accept-charset="UTF-8" action="<?php echo site_url('welcome/validarCadastro');?>" class="form-horizontal" id="novo_cliente" name="novo_cliente" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" value="✓" type="hidden"><input name="authenticity_token" value="AGOjy8iO1GzXyyzhf/qGziOJSD+aDxsh/b6bA+REhV0=" type="hidden"></div>
-    											<div class="col-lg-12">
-    												<div class="row">
-    													<ul class="nav nav-tabs" id="myTab">
-    														<li class="active"><a href="#info-tab" data-toggle="tab"><span class="glyphicon glyphicon-user"></span> Dados cadastrais</a></li>
-    														<li><a href="#endereco-tab" data-toggle="tab"><span class="glyphicon glyphicon-home"></span> Endereço residencial</a></li>
-    													</ul>
+                                            <?php 
+                                            echo validation_errors('<p><font color="#FF0000">','</p>');
+                                            if($this->session->flashdata('atualizacao_positivo'))
+                                            {
+                                              echo '<p><font color="#228B22">'.$this->session->flashdata('atualizacao_positivo').'</font></p>';
+                                          }
+                                          if($this->session->flashdata('atualizacao_negativo'))
+                                          {
+                                              echo '<p><font color="#FF0000">'.$this->session->flashdata('atualizacao_negativo').'</font></p>';
+                                          }
+                                          ?>
+                                          <form accept-charset="UTF-8" action="<?php echo site_url('welcome/validarCadastro');?>" class="form-horizontal" id="novo_cliente" name="novo_cliente" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" value="✓" type="hidden"><input name="authenticity_token" value="AGOjy8iO1GzXyyzhf/qGziOJSD+aDxsh/b6bA+REhV0=" type="hidden"></div>
+                                           <div class="col-lg-12">
+                                            <div class="row">
+                                             <ul class="nav nav-tabs" id="myTab">
+                                              <li class="active"><a href="#info-tab" data-toggle="tab"><span class="glyphicon glyphicon-user"></span> Dados cadastrais</a></li>
+                                              <li><a href="#endereco-tab" data-toggle="tab"><span class="glyphicon glyphicon-home"></span> Endereço residencial</a></li>
+                                          </ul>
 
-    													<div class="tab-content">
-    														<div class="tab-pane active in" id="info-tab">  
-    															<div class="form-group">    
-    																<div class="col-lg-4">
-    																	<label class="control-label"><label for="funcionario_nome">Nome</label></label>
-    																	<input class="form-control" id="cliente_nome" name="cliente_nome" required size="30" type="text">
-    																</div>              
-    																<div class="col-lg-4">
-    																	<label class="control-label"><label for="cliente_sexo">Sexo</label></label><br>
-    																	<input id="cliente_sexo" name="cliente_sexo" type="radio" value="M" checked>Masculino 
-    																	<input id="cliente_sexo" name="cliente_sexo" type="radio" value="F">Feminino           
-    																</div>	
-    															</div>  
+                                          <div class="tab-content">
+                                              <div class="tab-pane active in" id="info-tab">  
+                                               <div class="form-group">    
+                                                <div class="col-lg-4">
+                                                 <label class="control-label"><label for="funcionario_nome">Nome</label></label>
+                                                 <input class="form-control" id="cliente_nome" name="cliente_nome" required size="30" type="text">
+                                             </div>              
+                                             <div class="col-lg-4">
+                                                 <label class="control-label"><label for="cliente_sexo">Sexo</label></label><br>
+                                                 <input id="cliente_sexo" name="cliente_sexo" type="radio" value="M" checked>Masculino 
+                                                 <input id="cliente_sexo" name="cliente_sexo" type="radio" value="F">Feminino           
+                                             </div>	
+                                         </div>  
 
-    															<div class="form-group">    
-    																<div class="col-lg-4">
-    																	<label class="control-label"><label for="cliente_nascimento">Nascimento</label></label>
-    																	<input class="form-control" id="cliente_nascimento" name="cliente_nascimento" type="date">       
-    																</div>
-    																<div class="col-lg-4">
-    																	<div class="input-group">
-    																		<label class="control-label"><label for="cliente_celular">Celular</label></label>
-    																		<input required class="form-control" id="cliente_celular" name="cliente_celular" type="text" placeholder="(XX) XXXXX-XXXX"> 
-    																	</div>        
-    																</div>	
-    															</div>
-    															<div class="col-lg-4">
-    																<label class="control-label"><label>Login</label></label>
-    																<input class="form-control" id="cliente_login" name="cliente_login" required size="30" type="text">
-    															</div> 
+                                         <div class="form-group">    
+                                            <div class="col-lg-4">
+                                             <label class="control-label"><label for="cliente_nascimento">Nascimento</label></label>
+                                             <input class="form-control" id="cliente_nascimento" name="cliente_nascimento" type="date">       
+                                         </div>
+                                         <div class="col-lg-4">
+                                             <div class="input-group">
+                                              <label class="control-label"><label for="cliente_celular">Celular</label></label>
+                                              <input required class="form-control" id="cliente_celular" name="cliente_celular" type="text" placeholder="(XX) XXXXX-XXXX"> 
+                                          </div>        
+                                      </div>	
+                                  </div>
+                                  <div class="col-lg-4">
+                                    <label class="control-label"><label>Login</label></label>
+                                    <input class="form-control" id="cliente_login" name="cliente_login" required size="30" type="text">
+                                </div> 
 
-    															<div class="col-lg-4">
-    																<label class="control-label"><label>Senha</label></label>
-    																<input type="password" class="form-control" id="cliente_senha" name="cliente_senha" required size="30">
-    															</div> 
-    															<div class="form-group">   
-    																<div class="col-lg-8">
-    																	<label class="control-label"><label for="cliente_email">Email</label></label>
-    																	<input required class="form-control" id="cliente_email" name="cliente_email" type="text" placeholder="exemplo@exemplo.com"> 
-    																</div>  
-    															</div>     
-    															<div class="form-group"> 
-    																<div class="col-lg-2">
-    																	<button class="btn btn-info" type="button" onclick="proximaAba()"><span class="glyphicon glyphicon-home"></span> Endereço residencial</button>
-    																</div>			
-    															</div>   
-    														</div> <!-- Fim tab info -->
-    														<div class="tab-pane" id="endereco-tab">
-    															<div class="form-group">    
-    																<div class="col-lg-2">
-    																	<label class="control-label"><label for="cliente_cep">CEP</label></label>
-    																	<input class="form-control" id="cliente_cep" name="cliente_cep" type="text" size="30" onkeypress="return sem_acento(event);">  
-    																</div>          
-    															</div> 
-    															<div class="form-group"> 			
-    																<div class="col-lg-8">
-    																	<label class="control-label"><label for="cliente_logadrouro">Logradouro</label></label>
-    																	<input class="form-control" id="cliente_logadrouro" name="cliente_logadrouro" type="text" size="30"> 
-    																</div> 			  
-    															</div> 
-    															<div class="form-group"> 
-    																<div class="col-lg-2">
-    																	<label class="control-label"><label for="cliente_numero">Numero</label></label>
-    																	<input class="form-control" id="cliente_numero" name="cliente_numero" size="30" type="text">     
-    																</div>    
-    																<div class="col-lg-6">
-    																	<label class="control-label"><label for="cliente_complemento">Complemento</label></label>
-    																	<input class="form-control" id="cliente_complemento" name="cliente_complemento" type="text" size="30"> 
-    																</div>  
-    															</div>
-    															<div class="form-group">    
-    																<div class="col-lg-3">
-    																	<label class="control-label"><label for="cliente_bairro">Bairro</label></label>
-    																	<input class="form-control" id="cliente_bairro" name="cliente_bairro" size="30" type="text">     
-    																</div>  
+                                <div class="col-lg-4">
+                                    <label class="control-label"><label>Senha</label></label>
+                                    <input type="password" class="form-control" id="cliente_senha" name="cliente_senha" required size="30">
+                                </div> 
+                                <div class="form-group">   
+                                    <div class="col-lg-8">
+                                     <label class="control-label"><label for="cliente_email">Email</label></label>
+                                     <input required class="form-control" id="cliente_email" name="cliente_email" type="text" placeholder="exemplo@exemplo.com"> 
+                                 </div>  
+                             </div>     
+                             <div class="form-group"> 
+                                <div class="col-lg-2">
+                                 <button class="btn btn-info" type="button" onclick="proximaAba()"><span class="glyphicon glyphicon-home"></span> Endereço residencial</button>
+                             </div>			
+                         </div>   
+                     </div> <!-- Fim tab info -->
+                     <div class="tab-pane" id="endereco-tab">
+                       <div class="form-group">    
+                        <div class="col-lg-2">
+                         <label class="control-label"><label for="cliente_cep">CEP</label></label>
+                         <input class="form-control" id="cliente_cep" name="cliente_cep" type="text" size="30" onkeypress="return sem_acento(event);">  
+                     </div>          
+                 </div> 
+                 <div class="form-group"> 			
+                    <div class="col-lg-8">
+                     <label class="control-label"><label for="cliente_logadrouro">Logradouro</label></label>
+                     <input class="form-control" id="cliente_logadrouro" name="cliente_logadrouro" type="text" size="30"> 
+                 </div> 			  
+             </div> 
+             <div class="form-group"> 
+                <div class="col-lg-2">
+                 <label class="control-label"><label for="cliente_numero">Numero</label></label>
+                 <input class="form-control" id="cliente_numero" name="cliente_numero" size="30" type="text">     
+             </div>    
+             <div class="col-lg-6">
+                 <label class="control-label"><label for="cliente_complemento">Complemento</label></label>
+                 <input class="form-control" id="cliente_complemento" name="cliente_complemento" type="text" size="30"> 
+             </div>  
+         </div>
+         <div class="form-group">    
+            <div class="col-lg-3">
+             <label class="control-label"><label for="cliente_bairro">Bairro</label></label>
+             <input class="form-control" id="cliente_bairro" name="cliente_bairro" size="30" type="text">     
+         </div>  
 
-    																<div class="col-lg-3">
-    																	<label class="control-label"><label for="cliente_municipio">Município</label></label>
-    																	<input class="form-control" id="cliente_municipio" name="cliente_municipio" type="text" size="30">  
-    																</div>  
+         <div class="col-lg-3">
+             <label class="control-label"><label for="cliente_municipio">Município</label></label>
+             <input class="form-control" id="cliente_municipio" name="cliente_municipio" type="text" size="30">  
+         </div>  
 
-    																<div class="col-lg-2"> 
-    																	<label class="control-label"><label for="uf">UF</label></label>
-    																	<select required class="form-control" id="cliente_uf" name="cliente_uf">
-    																		<option selected="selected" disabled>Selecione...</option> 
-    																		<?php
-    																		foreach($estadosBrasileiros as $estados) { ?>
-    																			<option value='<?php echo $estados['sigla'];?>'><?php echo $estados['nome'];?></option>
-    																		<?php } ?>  
-    																	</select>
-    																</div>  			  
-    															</div> 
+         <div class="col-lg-2"> 
+             <label class="control-label"><label for="uf">UF</label></label>
+             <select required class="form-control" id="cliente_uf" name="cliente_uf">
+              <option selected="selected" disabled>Selecione...</option> 
+              <?php
+              foreach($estadosBrasileiros as $estados) { ?>
+               <option value='<?php echo $estados['sigla'];?>'><?php echo $estados['nome'];?></option>
+           <?php } ?>  
+       </select>
+   </div>  			  
+</div> 
 
-    															<div class="form-group"> 
-    																<div class="col-lg-2">
-    																	<button class="btn btn-info" type="button" onclick="voltarAba()"><span class="glyphicon glyphicon-user"></span> Dados cadastrais</button>
-    																</div>			
-    															</div>	
+<div class="form-group"> 
+    <div class="col-lg-2">
+     <button class="btn btn-info" type="button" onclick="voltarAba()"><span class="glyphicon glyphicon-user"></span> Dados cadastrais</button>
+ </div>			
+</div>	
 
-    														</div><!-- fim tab endereco -->
-    													</div>
-    												</div>
-    											</div>  
-    											<div class="form-group"> 
-    												<div class="col-lg-1">
-    													<a href="javascript:history.back()" class="btn-danger btn">Cancelar</a>
-    												</div>		
-    												<div class="col-lg-2">
-    													<input class="btn btn-success" name="commit" value="Salvar" type="submit" onclick="tirarmask()" >
-    												</div>					
-    											</div>
-    										</form>
-    									</div>
-    								</div>
-    							</div>
-    						</div>
-    					</div>
-    				</div>
-    				<!-- /page content -->
+</div><!-- fim tab endereco -->
+</div>
+</div>
+</div>  
+<div class="form-group"> 
+    <div class="col-lg-1">
+     <a href="javascript:history.back()" class="btn-danger btn">Cancelar</a>
+ </div>		
+ <div class="col-lg-2">
+     <input class="btn btn-success" name="commit" value="Salvar" type="submit" onclick="tirarmask()" >
+ </div>					
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- /page content -->
 
-    				<!-- footer content -->
-    				<footer>
-    					<div class="pull-right">
-    						TESTANDO 123
-    					</div>
-    					<div class="clearfix"></div>
-    				</footer>
-    				<!-- /footer content -->
-    			</div>
-    		</div>
-    	</body>
-    	</html>
+<!-- footer content -->
+<footer>
+ <div class="pull-right">
+  TESTANDO 123
+</div>
+<div class="clearfix"></div>
+</footer>
+<!-- /footer content -->
+</div>
+</div>
+</body>
+</html>
