@@ -140,7 +140,7 @@ $estadosBrasileiros = array(
               <div class="menu_section">
                <ul class="nav side-menu">        
                 <li><a href="<?php echo site_url('welcome/editarperfil'); ?>"><i class="fa fa-registered"></i> Editar Perfil</a>
-                  <li><a href="<?php echo site_url('welcome/CadastrarCliente');?>"><i class="fa fa-registered"></i>Listar Profissionais</a>  
+                  <li><a href="<?php echo site_url('welcome/listarProfissionaisEspecialidade');?>"><i class="fa fa-registered"></i>Listar Profissionais</a>  
                   </ul>
                 </div>
               </div>
@@ -159,7 +159,7 @@ $estadosBrasileiros = array(
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <span class="fa fa-user"></span> <?php echo $dados['login'];?>
+                <span class="fa fa-user"></span> <?php echo $this->session->userdata('login');?>
                 <span class="fa fa-angle-down"></span>
               </a>
               <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -168,7 +168,7 @@ $estadosBrasileiros = array(
                  <div class="text-center">
                   <a>
                    <i class="fa fa-male"></i>
-                   <strong><?php echo $dados['nome'];?></strong>                  
+                   <strong><?php echo $this->session->userdata('nome');?></strong>                  
                  </a>
                </div>
              </li>          

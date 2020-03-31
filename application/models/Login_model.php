@@ -82,6 +82,39 @@ class Login_model extends CI_Model
 		$this->db->set('id_usuario', $this->session->userdata('id'));
 		return $this->db->insert('perfil_profissional');
 	}
+
+	public function validar_login($dados=null){
+		$this->db->select('*');
+		$this->db->where('login', $dados['login']);
+		$this->db->from('usuario');
+		$dados = $this->db->get();
+		$dados = $dados->row_array();
+		$verificar = (is_array($dados) ? count($dados) : 0);
+		if ($verificar > 0){
+			return true;
+		}else {
+			return false;
+		}
+
+	}
+
+	public function buscar_dados_profissional($dados=null){
+		$this->db->select('id, nome');
+		$this->db->like('nome', $dados);
+		$this->db->where('tipo_usuario_id', 1);
+		$this->db->from('usuario');
+		$dados = $this->db->get();
+		return $dados->result_array();
+	}
+
+	public function perfil_profissional_especialidade($id = null, $especialidade=null){
+		$this->db->select('*');
+		$this->db->where('id_usuario', $id);
+		$this->db->like('especialidade', $especialidade);
+		$this->db->from('perfil_profissional');
+		$dados = $this->db->get();
+		return $dados->row_array();
+	}
 	
 	
 }

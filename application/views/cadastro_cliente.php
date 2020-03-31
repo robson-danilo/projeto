@@ -124,191 +124,191 @@ $estadosBrasileiros = array(
 
     					<div class="clearfix"></div>
 
-    					<!-- menu profile quick info -->
-    					<div class="profile clearfix">
-    						<div class="profile_pic text-center">
-    							<img src="<?php echo base_url()."/logos/teste.png";?>" class="img-circle profile_img">
-    						</div>
-    						<div class="profile_info">             
-    							Usuario		  
-    						</div>
-    						<div class="clearfix"></div>
-    					</div>
+                        <!-- menu profile quick info -->
+                        <div class="profile clearfix">
+                          <div class="profile_pic text-center">
+                           <img src="<?php echo base_url()."/logos/teste.png";?>" class="img-circle profile_img">
+                       </div>
+                       <div class="profile_info">             
+                           Usuario		  
+                       </div>
+                       <div class="clearfix"></div>
+                   </div>
 
-    					<!-- sidebar menu -->
-    					<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-    						<div class="menu_section">
-    							<ul class="nav side-menu">			   
-    								<li><a href="<?php echo site_url('welcome/CadastrarCliente');?>"><i class="fa fa-registered"></i> Cadastrar Cliente</a>		
-    								</ul>
-    							</div>
-    						</div>
-    						<!-- /sidebar menu -->
-    					</div>
-    				</div>
+                   <!-- sidebar menu -->
+                   <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                      <div class="menu_section">
+                       <ul class="nav side-menu">			   
+                        <li><a href="<?php echo site_url('welcome/CadastrarCliente');?>"><i class="fa fa-registered"></i> Cadastrar Cliente</a>		
+                        </ul>
+                    </div>
+                </div>
+                <!-- /sidebar menu -->
+            </div>
+        </div>
 
-    				<!-- top navigation -->
-    				<div class="top_nav">
-    					<div class="nav_menu">
-    						<nav>
-    							<div class="nav toggle">
-    								<a id="menu_toggle"><i class="fa fa-bars"></i></a>
-    							</div>
+        <!-- top navigation -->
+        <div class="top_nav">
+         <div class="nav_menu">
+          <nav>
+           <div class="nav toggle">
+            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+        </div>
 
-    							<ul class="nav navbar-nav navbar-right">
-    								<li class="">
-    									<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-    										<span class="fa fa-user"></span> CLIENTE
-    										<span class="fa fa-angle-down"></span>
-    									</a>
-    									<ul class="dropdown-menu dropdown-usermenu pull-right">
-    										<br>
-    										<li>
-    											<div class="text-center">
-    												<a>
-    													<i class="fa fa-male"></i>
-    													<strong>TESTE</strong>									
-    												</a>
-    											</div>
-    										</li>					
-    										<li class="divider"></li>						
-
-    										<li><a href="<?php echo site_url('login/logout'); ?>"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
-    									</ul>
-    								</li>
-    							</ul>
-    						</nav>
-    					</div>
-    				</div>
-    				<!-- /top navigation -->
-
-    				<!-- page content -->
-    				<div class="right_col" role="main">
-    					<div class="">
-    						<div class="page-title">
-    							<p><h1>Centro Solidario</h1></p>
-
-    							<div class="title_left">
-    								<p><h4>Cadastro</h4></p>
-    							</div>
-
-    						</div>
-    						<div class="clearfix"></div>
-
-    						<div class="row">
-    							<div class="col-md-12 col-sm-12 col-xs-12">
-    								<div class="x_panel">
-    									<div class="x_content">
-                                            <?php 
-                                            echo validation_errors('<p><font color="#FF0000">','</p>');
-                                            if($this->session->flashdata('atualizacao_positivo'))
-                                            {
-                                              echo '<p><font color="#228B22">'.$this->session->flashdata('atualizacao_positivo').'</font></p>';
-                                          }
-                                          if($this->session->flashdata('atualizacao_negativo'))
-                                          {
-                                              echo '<p><font color="#FF0000">'.$this->session->flashdata('atualizacao_negativo').'</font></p>';
-                                          }
-                                          ?>
-                                          <form accept-charset="UTF-8" action="<?php echo site_url('welcome/validarCadastro');?>" class="form-horizontal" id="novo_cliente" name="novo_cliente" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" value="✓" type="hidden"><input name="authenticity_token" value="AGOjy8iO1GzXyyzhf/qGziOJSD+aDxsh/b6bA+REhV0=" type="hidden"></div>
-                                           <div class="col-lg-12">
-                                            <div class="row">
-                                             <ul class="nav nav-tabs" id="myTab">
-                                              <li class="active"><a href="#info-tab" data-toggle="tab"><span class="glyphicon glyphicon-user"></span> Dados cadastrais</a></li>
-                                              <li><a href="#endereco-tab" data-toggle="tab"><span class="glyphicon glyphicon-home"></span> Endereço residencial</a></li>
-                                          </ul>
-
-                                          <div class="tab-content">
-                                              <div class="tab-pane active in" id="info-tab">  
-                                               <div class="form-group">    
-                                                <div class="col-lg-4">
-                                                 <label class="control-label"><label for="funcionario_nome">Nome</label></label>
-                                                 <input class="form-control" id="cliente_nome" name="cliente_nome" required size="30" type="text">
-                                             </div>              
-                                             <div class="col-lg-4">
-                                                 <label class="control-label"><label for="cliente_sexo">Sexo</label></label><br>
-                                                 <input id="cliente_sexo" name="cliente_sexo" type="radio" value="M" checked>Masculino 
-                                                 <input id="cliente_sexo" name="cliente_sexo" type="radio" value="F">Feminino           
-                                             </div>	
-                                         </div>  
-
-                                         <div class="form-group">    
-                                            <div class="col-lg-4">
-                                             <label class="control-label"><label for="cliente_nascimento">Nascimento</label></label>
-                                             <input class="form-control" id="cliente_nascimento" name="cliente_nascimento" type="date">       
-                                         </div>
-                                         <div class="col-lg-4">
-                                             <div class="input-group">
-                                              <label class="control-label"><label for="cliente_celular">Celular</label></label>
-                                              <input required class="form-control" id="cliente_celular" name="cliente_celular" type="text" placeholder="(XX) XXXXX-XXXX"> 
-                                          </div>        
-                                      </div>	
-                                  </div>
-                                  <div class="col-lg-4">
-                                    <label class="control-label"><label>Login</label></label>
-                                    <input class="form-control" id="cliente_login" name="cliente_login" required size="30" type="text">
-                                </div> 
-
-                                <div class="col-lg-4">
-                                    <label class="control-label"><label>Senha</label></label>
-                                    <input type="password" class="form-control" id="cliente_senha" name="cliente_senha" required size="30">
-                                </div> 
-                                <div class="form-group">   
-                                    <div class="col-lg-8">
-                                     <label class="control-label"><label for="cliente_email">Email</label></label>
-                                     <input required class="form-control" id="cliente_email" name="cliente_email" type="text" placeholder="exemplo@exemplo.com"> 
-                                 </div>  
-                             </div>     
-                             <div class="form-group"> 
-                                <div class="col-lg-2">
-                                 <button class="btn btn-info" type="button" onclick="proximaAba()"><span class="glyphicon glyphicon-home"></span> Endereço residencial</button>
-                             </div>			
-                         </div>   
-                     </div> <!-- Fim tab info -->
-                     <div class="tab-pane" id="endereco-tab">
-                       <div class="form-group">    
-                        <div class="col-lg-2">
-                         <label class="control-label"><label for="cliente_cep">CEP</label></label>
-                         <input class="form-control" id="cliente_cep" name="cliente_cep" type="text" size="30" onkeypress="return sem_acento(event);">  
-                     </div>          
-                 </div> 
-                 <div class="form-group"> 			
-                    <div class="col-lg-8">
-                     <label class="control-label"><label for="cliente_logadrouro">Logradouro</label></label>
-                     <input class="form-control" id="cliente_logadrouro" name="cliente_logadrouro" type="text" size="30"> 
-                 </div> 			  
-             </div> 
-             <div class="form-group"> 
-                <div class="col-lg-2">
-                 <label class="control-label"><label for="cliente_numero">Numero</label></label>
-                 <input class="form-control" id="cliente_numero" name="cliente_numero" size="30" type="text">     
-             </div>    
-             <div class="col-lg-6">
-                 <label class="control-label"><label for="cliente_complemento">Complemento</label></label>
-                 <input class="form-control" id="cliente_complemento" name="cliente_complemento" type="text" size="30"> 
-             </div>  
+        <ul class="nav navbar-nav navbar-right">
+            <li class="">
+             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <span class="fa fa-user"></span> CLIENTE
+              <span class="fa fa-angle-down"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-usermenu pull-right">
+              <br>
+              <li>
+               <div class="text-center">
+                <a>
+                 <i class="fa fa-male"></i>
+                 <strong>TESTE</strong>									
+             </a>
          </div>
-         <div class="form-group">    
-            <div class="col-lg-3">
-             <label class="control-label"><label for="cliente_bairro">Bairro</label></label>
-             <input class="form-control" id="cliente_bairro" name="cliente_bairro" size="30" type="text">     
-         </div>  
+     </li>					
+     <li class="divider"></li>						
 
-         <div class="col-lg-3">
-             <label class="control-label"><label for="cliente_municipio">Município</label></label>
-             <input class="form-control" id="cliente_municipio" name="cliente_municipio" type="text" size="30">  
-         </div>  
+     <li><a href="<?php echo site_url('login/logout'); ?>"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
+ </ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<!-- /top navigation -->
 
-         <div class="col-lg-2"> 
-             <label class="control-label"><label for="uf">UF</label></label>
-             <select required class="form-control" id="cliente_uf" name="cliente_uf">
-              <option selected="selected" disabled>Selecione...</option> 
-              <?php
-              foreach($estadosBrasileiros as $estados) { ?>
-               <option value='<?php echo $estados['sigla'];?>'><?php echo $estados['nome'];?></option>
-           <?php } ?>  
-       </select>
-   </div>  			  
+<!-- page content -->
+<div class="right_col" role="main">
+ <div class="">
+  <div class="page-title">
+   <p><h1>Centro Solidario</h1></p>
+
+   <div class="title_left">
+    <p><h4>Cadastro</h4></p>
+</div>
+
+</div>
+<div class="clearfix"></div>
+
+<div class="row">
+   <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+     <div class="x_content">
+        <?php 
+        echo validation_errors('<p><font color="#FF0000">','</p>');
+        if($this->session->flashdata('atualizacao_positivo'))
+        {
+          echo '<p><font color="#228B22">'.$this->session->flashdata('atualizacao_positivo').'</font></p>';
+      }
+      if($this->session->flashdata('atualizacao_negativo'))
+      {
+          echo '<p><font color="#FF0000">'.$this->session->flashdata('atualizacao_negativo').'</font></p>';
+      }
+      ?>
+      <form accept-charset="UTF-8" action="<?php echo site_url('welcome/validarCadastro');?>" class="form-horizontal" id="novo_cliente" name="novo_cliente" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" value="✓" type="hidden"><input name="authenticity_token" value="AGOjy8iO1GzXyyzhf/qGziOJSD+aDxsh/b6bA+REhV0=" type="hidden"></div>
+       <div class="col-lg-12">
+        <div class="row">
+         <ul class="nav nav-tabs" id="myTab">
+          <li class="active"><a href="#info-tab" data-toggle="tab"><span class="glyphicon glyphicon-user"></span> Dados cadastrais</a></li>
+          <li><a href="#endereco-tab" data-toggle="tab"><span class="glyphicon glyphicon-home"></span> Endereço residencial</a></li>
+      </ul>
+
+      <div class="tab-content">
+          <div class="tab-pane active in" id="info-tab">  
+           <div class="form-group">    
+            <div class="col-lg-4">
+             <label class="control-label"><label for="funcionario_nome">Nome</label></label>
+             <input class="form-control" id="cliente_nome" name="cliente_nome" required size="30" type="text">
+         </div>              
+         <div class="col-lg-4">
+             <label class="control-label"><label for="cliente_sexo">Sexo</label></label><br>
+             <input id="cliente_sexo" name="cliente_sexo" type="radio" value="M" checked>Masculino 
+             <input id="cliente_sexo" name="cliente_sexo" type="radio" value="F">Feminino           
+         </div>	
+     </div>  
+
+     <div class="form-group">    
+        <div class="col-lg-4">
+         <label class="control-label"><label for="cliente_nascimento">Nascimento</label></label>
+         <input class="form-control" id="cliente_nascimento" name="cliente_nascimento" type="date">       
+     </div>
+     <div class="col-lg-4">
+         <div class="input-group">
+          <label class="control-label"><label for="cliente_celular">Celular</label></label>
+          <input required class="form-control" id="cliente_celular" name="cliente_celular" type="text" placeholder="(XX) XXXXX-XXXX"> 
+      </div>        
+  </div>	
+</div>
+<div class="col-lg-4">
+    <label class="control-label"><label>Login</label></label>
+    <input class="form-control" id="cliente_login" name="cliente_login" required size="30" type="text">
+</div> 
+
+<div class="col-lg-4">
+    <label class="control-label"><label>Senha</label></label>
+    <input type="password" class="form-control" id="cliente_senha" name="cliente_senha" required size="30">
+</div> 
+<div class="form-group">   
+    <div class="col-lg-8">
+     <label class="control-label"><label for="cliente_email">Email</label></label>
+     <input required class="form-control" id="cliente_email" name="cliente_email" type="text" placeholder="exemplo@exemplo.com"> 
+ </div>  
+</div>     
+<div class="form-group"> 
+    <div class="col-lg-2">
+     <button class="btn btn-info" type="button" onclick="proximaAba()"><span class="glyphicon glyphicon-home"></span> Endereço residencial</button>
+ </div>			
+</div>   
+</div> <!-- Fim tab info -->
+<div class="tab-pane" id="endereco-tab">
+   <div class="form-group">    
+    <div class="col-lg-2">
+     <label class="control-label"><label for="cliente_cep">CEP</label></label>
+     <input class="form-control" id="cliente_cep" name="cliente_cep" type="text" size="30" onkeypress="return sem_acento(event);">  
+ </div>          
+</div> 
+<div class="form-group"> 			
+    <div class="col-lg-8">
+     <label class="control-label"><label for="cliente_logadrouro">Logradouro</label></label>
+     <input class="form-control" id="cliente_logadrouro" name="cliente_logadrouro" type="text" size="30"> 
+ </div> 			  
+</div> 
+<div class="form-group"> 
+    <div class="col-lg-2">
+     <label class="control-label"><label for="cliente_numero">Numero</label></label>
+     <input class="form-control" id="cliente_numero" name="cliente_numero" size="30" type="text">     
+ </div>    
+ <div class="col-lg-6">
+     <label class="control-label"><label for="cliente_complemento">Complemento</label></label>
+     <input class="form-control" id="cliente_complemento" name="cliente_complemento" type="text" size="30"> 
+ </div>  
+</div>
+<div class="form-group">    
+    <div class="col-lg-3">
+     <label class="control-label"><label for="cliente_bairro">Bairro</label></label>
+     <input class="form-control" id="cliente_bairro" name="cliente_bairro" size="30" type="text">     
+ </div>  
+
+ <div class="col-lg-3">
+     <label class="control-label"><label for="cliente_municipio">Município</label></label>
+     <input class="form-control" id="cliente_municipio" name="cliente_municipio" type="text" size="30">  
+ </div>  
+
+ <div class="col-lg-2"> 
+     <label class="control-label"><label for="uf">UF</label></label>
+     <select required class="form-control" id="cliente_uf" name="cliente_uf">
+      <option selected="selected" disabled>Selecione...</option> 
+      <?php
+      foreach($estadosBrasileiros as $estados) { ?>
+       <option value='<?php echo $estados['sigla'];?>'><?php echo $estados['nome'];?></option>
+   <?php } ?>  
+</select>
+</div>  			  
 </div> 
 
 <div class="form-group"> 

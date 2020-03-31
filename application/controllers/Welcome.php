@@ -57,6 +57,7 @@ class Welcome extends CI_Controller {
 			$this->session->set_userdata( 'id' ,  $dados['dados']['id']);
 			$this->session->set_userdata( 'login' ,  $dados['dados']['login']);
 			$this->session->set_userdata( 'tipo_usuario_id' ,  $dados['dados']['tipo_usuario_id']);
+			$this->session->set_userdata( 'nome' ,  $dados['dados']['nome']);
 			//print_r($dados);
 			if ($dados['dados']['tipo_usuario_id'] == 1){
 
@@ -66,9 +67,9 @@ class Welcome extends CI_Controller {
 					$dados['dados_pro'] = 0;
 				}
 				//print_r($dados['dados_pro']);exit;
-				$this->load->view('admViews', $dados);
+				$this->load->view('adm/admViews', $dados);
 			}else {
-				$this->load->view('pacienteViews', $dados);
+				$this->load->view('paciente/pacienteViews', $dados);
 			}
 		}
 	}
@@ -93,59 +94,67 @@ class Welcome extends CI_Controller {
 			'municipio' =>$this->input->post('cliente_municipio'),
 			'uf' =>$this->input->post('cliente_uf')
 		);
-		$verificar = $this->login_model->cadastrar_cliente($dados);
-		if($verificar!=true)
-		{
-			$this->session->set_flashdata('atualizacao_negativo','Nao foi possivel atualizar os dados!');
-		}
-		else
-		{
-			$this->session->set_flashdata('atualizacao_positivo','Atualizacao dos dados realizada com sucesso!');
-		}
 
-		$this->load->view('cadastro_cliente');
-	}
+		$validarlogin = $this->login_model->validar_login($dados);
 
-	public function editarperfil(){
-		if (!empty($this->input->post('cliente_nome'))){
-			$dados = array('nome' =>$this->input->post('cliente_nome'),
-				'sexo' =>$this->input->post('cliente_sexo'),
-				'nascimento' =>$this->input->post('cliente_nascimento'),
-				'celular' =>$this->input->post('cliente_celular'),
-				'login' =>$this->input->post('cliente_login'),
-				'senha' =>$this->input->post('cliente_senha'),
-				'email' =>$this->input->post('cliente_email'),
-				'cep' =>$this->input->post('cliente_cep'),
-				'logadrouro' =>$this->input->post('cliente_logadrouro'),
-				'numero' =>$this->input->post('cliente_numero'),
-				'complemento' =>$this->input->post('cliente_complemento'),
-				'bairro' =>$this->input->post('cliente_bairro'),
-				'municipio' =>$this->input->post('cliente_municipio'),
-				'uf' =>$this->input->post('cliente_uf')
-			);
-
-			$verificar = $this->login_model->editar_dados($dados);
-
+		if ($validarlogin == true){
+			$this->session->set_flashdata('atualizacao_negativo','Login já cadastrado, tente outro');
+		}else {
+			$verificar = $this->login_model->cadastrar_cliente($dados);
 			if($verificar!=true)
 			{
-				$this->session->set_flashdata('atualizacao_negativo','Nao foi possivel atualizar os dados!');
+				$this->session->set_flashdata('atualizacao_negativo','Nao foi possivel cadastrar os dados!');
 			}
 			else
 			{
-				$this->session->set_flashdata('atualizacao_positivo','Atualizacao dos dados realizada com sucesso!');
+				$this->session->set_flashdata('atualizacao_positivo','Cadastramento dos dados realizada com sucesso!');
 			}
-		}
-		$dados['dados'] = $this->login_model->buscar_dados($this->session->userdata('id'));
-		//print_r($dados);
-		if ($dados['dados']['tipo_usuario_id'] == 1){
-			$this->load->view('editar_dados_profissional', $dados);
-		}else {
-			$this->load->view('editar_dados_paciente', $dados);
-		}
-		
-	}
 
-	public function editarperfilprofissional(){
+			$this->load->view('cadastro_cliente');
+		}
+
+		redirect('/welcome/CadastrarCliente');	}
+
+		public function editarperfil(){
+			if (!empty($this->input->post('cliente_nome'))){
+				$dados = array('nome' =>$this->input->post('cliente_nome'),
+					'sexo' =>$this->input->post('cliente_sexo'),
+					'nascimento' =>$this->input->post('cliente_nascimento'),
+					'celular' =>$this->input->post('cliente_celular'),
+					'login' =>$this->input->post('cliente_login'),
+					'senha' =>$this->input->post('cliente_senha'),
+					'email' =>$this->input->post('cliente_email'),
+					'cep' =>$this->input->post('cliente_cep'),
+					'logadrouro' =>$this->input->post('cliente_logadrouro'),
+					'numero' =>$this->input->post('cliente_numero'),
+					'complemento' =>$this->input->post('cliente_complemento'),
+					'bairro' =>$this->input->post('cliente_bairro'),
+					'municipio' =>$this->input->post('cliente_municipio'),
+					'uf' =>$this->input->post('cliente_uf')
+				);
+
+				$verificar = $this->login_model->editar_dados($dados);
+
+				if($verificar!=true)
+				{
+					$this->session->set_flashdata('atualizacao_negativo','Nao foi possivel atualizar os dados!');
+				}
+				else
+				{
+					$this->session->set_flashdata('atualizacao_positivo','Atualizacao dos dados realizada com sucesso!');
+				}
+			}
+			$dados['dados'] = $this->login_model->buscar_dados($this->session->userdata('id'));
+		//print_r($dados);
+			if ($dados['dados']['tipo_usuario_id'] == 1){
+				$this->load->view('adm/editar_dados_profissional', $dados);
+			}else {
+				$this->load->view('paciente/editar_dados_paciente', $dados);
+			}
+
+		}
+
+		public function editarperfilprofissional(){
 
 		if (!empty($this->input->post('especialidade')) && $this->input->post('novo_perfil_pro') == 'F'){//Editando perfil profissional
 			$dados = array('especialidade' =>$this->input->post('especialidade'),
@@ -184,6 +193,32 @@ class Welcome extends CI_Controller {
 			$dados['dados_pro'] = 0;
 		}
 				//print_r($dados['dados_pro']);exit;
-		$this->load->view('admViews', $dados);
+		$this->load->view('adm/admViews', $dados);
+	}
+
+	public function listarProfissionaisEspecialidade(){
+		$this->load->view('paciente/listar_pro');
+	}
+
+
+	public function AjaxListarProfissional(){
+		$dados = $this->login_model->buscar_dados_profissional($this->input->get('nome'));
+		$especialidade = $this->input->get('especialidade');
+		foreach ($dados as $key => $value) {
+			$retorno[] = $this->login_model->perfil_profissional_especialidade($value['id'], $especialidade);
+		}
+		//print_r($retorno);exit;
+		foreach ($retorno as $key => $value) {
+			foreach ($dados as $key2 => $value2) {
+				if ($value['id_usuario'] == $value2['id']){
+					foreach ($value2 as $key3 => $value3) {
+						$retorno[$key][$key3] = $value3;
+					}
+				}
+			}
+		}
+		$dados = array_filter($retorno);
+		echo json_encode($dados,JSON_UNESCAPED_UNICODE);
+		
 	}
 }

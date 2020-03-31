@@ -1,33 +1,5 @@
 <?php 
-$estadosBrasileiros = array(
-  array("sigla" => "AC", "nome" => "Acre"),
-  array("sigla" => "AL", "nome" => "Alagoas"),
-  array("sigla" => "AM", "nome" => "Amazonas"),
-  array("sigla" => "AP", "nome" => "Amapá"),
-  array("sigla" => "BA", "nome" => "Bahia"),
-  array("sigla" => "CE", "nome" => "Ceará"),
-  array("sigla" => "DF", "nome" => "Distrito Federal"),
-  array("sigla" => "ES", "nome" => "Espírito Santo"),
-  array("sigla" => "GO", "nome" => "Goiás"),
-  array("sigla" => "MA", "nome" => "Maranhão"),
-  array("sigla" => "MT", "nome" => "Mato Grosso"),
-  array("sigla" => "MS", "nome" => "Mato Grosso do Sul"),
-  array("sigla" => "MG", "nome" => "Minas Gerais"),
-  array("sigla" => "PA", "nome" => "Pará"),
-  array("sigla" => "PB", "nome" => "Paraíba"),
-  array("sigla" => "PR", "nome" => "Paraná"),
-  array("sigla" => "PE", "nome" => "Pernambuco"),
-  array("sigla" => "PI", "nome" => "Piauí"),
-  array("sigla" => "RJ", "nome" => "Rio de Janeiro"),
-  array("sigla" => "RN", "nome" => "Rio Grande do Norte"),
-  array("sigla" => "RO", "nome" => "Rondônia"),
-  array("sigla" => "RS", "nome" => "Rio Grande do Sul"),
-  array("sigla" => "RR", "nome" => "Roraima"),
-  array("sigla" => "SC", "nome" => "Santa Catarina"),
-  array("sigla" => "SE", "nome" => "Sergipe"),
-  array("sigla" => "SP", "nome" => "São Paulo"),
-  array("sigla" => "TO", "nome" => "Tocantins")
-);  
+  
 ?>
 <html lang="pt-br">
 <head>
@@ -96,7 +68,7 @@ $estadosBrasileiros = array(
     <div class="menu_section">
      <ul class="nav side-menu">            
       <li><a href="<?php echo site_url('welcome/editarperfil'); ?>"><i class="fa fa-registered"></i> Editar Perfil</a>
-        <li><a href="<?php echo site_url('welcome/CadastrarCliente');?>"><i class="fa fa-registered"></i>Listar Profissionais</a>  
+        <li><a href="<?php echo site_url('welcome/listarProfissionaisEspecialidade');?>"><i class="fa fa-registered"></i>Listar Profissionais</a>  
         </ul>
       </div>
     </div>
@@ -115,7 +87,7 @@ $estadosBrasileiros = array(
   <ul class="nav navbar-nav navbar-right">
     <li class="">
      <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-      <span class="fa fa-user"></span> <?php echo $dados['login'];?>
+      <span class="fa fa-user"></span> <?php echo $this->session->userdata('login');?>
       <span class="fa fa-angle-down"></span>
     </a>
     <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -124,7 +96,7 @@ $estadosBrasileiros = array(
        <div class="text-center">
         <a>
          <i class="fa fa-male"></i>
-         <strong><?php echo $dados['nome'];?></strong>                                  
+         <strong><?php echo $this->session->userdata('nome');?></strong>                                  
        </a>
      </div>
    </li>                    

@@ -126,7 +126,7 @@ $login = $this->session->userdata('login');
    <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
      <div class="navbar nav_title" style="border: 0;">
-      <a href="#" class="site_title"><i class="fa fa-smile-o"></i> <span>Cadastro</span></a>
+      <a href="#" class="site_title"><i class="fa fa-smile-o"></i> <span>SOLIDARIO</span></a>
     </div>
 
     <div class="clearfix"></div>
@@ -167,7 +167,7 @@ $login = $this->session->userdata('login');
     <ul class="nav navbar-nav navbar-right">
       <li class="">
        <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-        <span class="fa fa-user"></span> <?php echo $dados['login'];?>
+        <span class="fa fa-user"></span> <?php echo $this->session->userdata('login');?>
         <span class="fa fa-angle-down"></span>
       </a>
       <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -176,7 +176,7 @@ $login = $this->session->userdata('login');
          <div class="text-center">
           <a>
            <i class="fa fa-male"></i>
-           <strong><?php echo $dados['nome'];?></strong>									
+           <strong><?php echo $this->session->userdata('nome');?></strong>									
          </a>
        </div>
      </li>					
