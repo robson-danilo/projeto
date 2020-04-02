@@ -83,7 +83,7 @@
             event_data += '</div>';
 
             event_data += '<div class="right col-xs-5 text-center">';
-            event_data += '<img src="<?php echo base_url()."logos/teste.jpg";?>" alt="" class="img-circle img-responsive">';
+            event_data += '<img src="<?php echo base_url()."logos/'+value.foto+'";?>" alt="" class="img-circle img-responsive">';
             event_data += '</div>';
 
             event_data += '</div>';

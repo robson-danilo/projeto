@@ -16,6 +16,17 @@ class Login_model extends CI_Model
 		}
 	}
 
+	public function editar_imagem_logo($dados=null){
+		$this->foto = $dados['nome'];
+		return $this->db->update('perfil_profissional', $this, array('id' => $dados['id']));
+	}
+
+	public function adicionar_imagem_logo($dados=null){
+		$this->db->set('foto', $dados['nome']);
+		$this->db->set('id_usuario', $dados['id']);
+		return $this->db->insert('perfil_profissional');
+	}
+
 	public function buscar_dados($id){
 		$this->db->select('*');
 		$this->db->from('usuario');

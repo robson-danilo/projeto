@@ -127,7 +127,7 @@ $estadosBrasileiros = array(
               <!-- menu profile quick info -->
               <div class="profile clearfix">
                 <div class="profile_pic text-center">
-                 <img src="<?php echo base_url()."logos/teste.jpg";?>" height="60" class="img-circle profile_img">
+                 <img src="<?php echo base_url()?>/logos/<?php echo $this->session->userdata('foto');?>" height="60" class="img-circle profile_img">
                </div>
                <div class="profile_info">             
                  Usuario      
@@ -169,7 +169,7 @@ $estadosBrasileiros = array(
                    <div class="text-center">
                     <a>
                      <i class="fa fa-male"></i>
-                     <strong><?php echo $this->session->userdata('session');?></strong>                  
+                     <strong><?php echo $this->session->userdata('nome');?></strong>                  
                    </a>
                  </div>
                </li>          

@@ -39,9 +39,67 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
+		session_destroy();
 		$this->session->set_flashdata('atualizacao_positivo','');
 		$this->session->set_flashdata('atualizacao_negativo','');
 		$this->load->view('loginViews');
+	}
+
+	public function encaminhando_imagem_cortada(){
+		if(isset($_POST["image"]))
+		{
+
+
+			$tipo = substr($_POST["tipo"], -3);
+			if ($this->session->userdata('foto') == '0'){
+				$nomeImagem = md5(date('H:i:s',time())).'.'.$tipo;
+				$new = 1;
+
+			}else {
+				$nomeImagem = $this->session->userdata('foto');
+				$new = 0;
+			}
+			$this->session->set_userdata('logo', $nomeImagem);
+
+
+			$usuario_id = $this->session->userdata('id');
+
+			$data = $_POST["image"];
+
+			$image_array_1 = explode(";", $data);
+
+			$image_array_2 = explode(",", $image_array_1[1]);
+
+			$data = base64_decode($image_array_2[1]);
+
+			$dir = 'logos/';
+			
+			$imageName = $dir.$nomeImagem;
+
+			file_put_contents($imageName, $data);
+
+			$dados['id'] = $usuario_id;
+			$dados['nome'] = $nomeImagem;
+			$dados['logo'] = $logo;
+
+			if ($new != 1){
+				$resultado = $this->login_model->editar_imagem_logo($dados);
+			}else {
+				$resultado = $this->login_model->adicionar_imagem_logo($dados);
+			}
+			
+
+			if($resultado!=true)
+			{
+				$this->session->set_flashdata('atualizacao_negativo','Nao foi possivel atualizar a logo!');
+			}
+			else
+			{
+				$this->session->set_flashdata('atualizacao_positivo','Atualizacao da logo realizada com sucesso!');
+			}
+
+			echo json_encode($resultado,JSON_UNESCAPED_UNICODE);
+		}	
 	}
 
 	public function login(){
@@ -65,8 +123,10 @@ class Welcome extends CI_Controller {
 
 				if (empty($dados['dados_pro'])){
 					$dados['dados_pro'] = 0;
+					$this->session->set_userdata('foto', '0');
+				}else {
+					$this->session->set_userdata('foto', $dados['dados_pro']['foto']);
 				}
-				//print_r($dados['dados_pro']);exit;
 				$this->load->view('adm/admViews', $dados);
 			}else {
 				$this->load->view('paciente/pacienteViews', $dados);
@@ -113,48 +173,49 @@ class Welcome extends CI_Controller {
 			$this->load->view('cadastro_cliente');
 		}
 
-		redirect('/welcome/CadastrarCliente');	}
+		redirect('/welcome/CadastrarCliente');	
+	}
 
-		public function editarperfil(){
-			if (!empty($this->input->post('cliente_nome'))){
-				$dados = array('nome' =>$this->input->post('cliente_nome'),
-					'sexo' =>$this->input->post('cliente_sexo'),
-					'nascimento' =>$this->input->post('cliente_nascimento'),
-					'celular' =>$this->input->post('cliente_celular'),
-					'login' =>$this->input->post('cliente_login'),
-					'senha' =>$this->input->post('cliente_senha'),
-					'email' =>$this->input->post('cliente_email'),
-					'cep' =>$this->input->post('cliente_cep'),
-					'logadrouro' =>$this->input->post('cliente_logadrouro'),
-					'numero' =>$this->input->post('cliente_numero'),
-					'complemento' =>$this->input->post('cliente_complemento'),
-					'bairro' =>$this->input->post('cliente_bairro'),
-					'municipio' =>$this->input->post('cliente_municipio'),
-					'uf' =>$this->input->post('cliente_uf')
-				);
+	public function editarperfil(){
+		if (!empty($this->input->post('cliente_nome'))){
+			$dados = array('nome' =>$this->input->post('cliente_nome'),
+				'sexo' =>$this->input->post('cliente_sexo'),
+				'nascimento' =>$this->input->post('cliente_nascimento'),
+				'celular' =>$this->input->post('cliente_celular'),
+				'login' =>$this->input->post('cliente_login'),
+				'senha' =>$this->input->post('cliente_senha'),
+				'email' =>$this->input->post('cliente_email'),
+				'cep' =>$this->input->post('cliente_cep'),
+				'logadrouro' =>$this->input->post('cliente_logadrouro'),
+				'numero' =>$this->input->post('cliente_numero'),
+				'complemento' =>$this->input->post('cliente_complemento'),
+				'bairro' =>$this->input->post('cliente_bairro'),
+				'municipio' =>$this->input->post('cliente_municipio'),
+				'uf' =>$this->input->post('cliente_uf')
+			);
 
-				$verificar = $this->login_model->editar_dados($dados);
+			$verificar = $this->login_model->editar_dados($dados);
 
-				if($verificar!=true)
-				{
-					$this->session->set_flashdata('atualizacao_negativo','Nao foi possivel atualizar os dados!');
-				}
-				else
-				{
-					$this->session->set_flashdata('atualizacao_positivo','Atualizacao dos dados realizada com sucesso!');
-				}
+			if($verificar!=true)
+			{
+				$this->session->set_flashdata('atualizacao_negativo','Nao foi possivel atualizar os dados!');
 			}
-			$dados['dados'] = $this->login_model->buscar_dados($this->session->userdata('id'));
+			else
+			{
+				$this->session->set_flashdata('atualizacao_positivo','Atualizacao dos dados realizada com sucesso!');
+			}
+		}
+		$dados['dados'] = $this->login_model->buscar_dados($this->session->userdata('id'));
 		//print_r($dados);
-			if ($dados['dados']['tipo_usuario_id'] == 1){
-				$this->load->view('adm/editar_dados_profissional', $dados);
-			}else {
-				$this->load->view('paciente/editar_dados_paciente', $dados);
-			}
-
+		if ($dados['dados']['tipo_usuario_id'] == 1){
+			$this->load->view('adm/editar_dados_profissional', $dados);
+		}else {
+			$this->load->view('paciente/editar_dados_paciente', $dados);
 		}
 
-		public function editarperfilprofissional(){
+	}
+
+	public function editarperfilprofissional(){
 
 		if (!empty($this->input->post('especialidade')) && $this->input->post('novo_perfil_pro') == 'F'){//Editando perfil profissional
 			$dados = array('especialidade' =>$this->input->post('especialidade'),

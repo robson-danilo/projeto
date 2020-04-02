@@ -94,21 +94,24 @@ $login = $this->session->userdata('login');
       });
 
       $('.crop_image_logo').click(function(event){
-        var usuario_id = id_perfil;
         var tipo = $('#foto').val();
         $image_crop_logo.croppie('result', {
           type: 'canvas',
           size: 'viewport'
         }).then(function(response){
           $.ajax({
-            url:"<?php echo base_url();?>clinica/clinica/encaminhando_imagem_cortada",
+            url:"<?php echo site_url();?>/welcome/encaminhando_imagem_cortada",
             type: "POST",
-            data:{"image": response,
-            usuario_id, tipo},
+            data:{"image": response, tipo},
             success:function(data)
             {
               $('#inserir_imagem_modal_logo').modal('hide');
-              $('#inserir_imagem').html(data);
+              $('#mensagemimg').html('');                     
+              $('#mensagemimg').append('<i class="fa fa-spinner fa-spin"></i>Upload imagem...');
+              setTimeout(function () { 
+                $('#mensagemimg').html('');  
+                window.location.reload();
+              }, 3 * 1000);
             }
           });
         })
@@ -134,7 +137,7 @@ $login = $this->session->userdata('login');
     <!-- menu profile quick info -->
     <div class="profile clearfix">
       <div class="profile_pic text-center">
-       <img src="<?php echo base_url()."logos/teste.jpg";?>" height="60" class="img-circle profile_img">
+       <img src="<?php echo base_url()?>/logos/<?php echo $this->session->userdata('foto');?>" height="60" class="img-circle profile_img">
      </div>
      <div class="profile_info">             
        Usuario		  
@@ -221,63 +224,86 @@ $login = $this->session->userdata('login');
     ?>
 
     <form accept-charset="UTF-8" action="<?php echo site_url('welcome/editarperfilprofissional');?>" class="form-horizontal" id="novo_cliente" name="novo_cliente" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" value="✓" type="hidden"><input name="authenticity_token" value="AGOjy8iO1GzXyyzhf/qGziOJSD+aDxsh/b6bA+REhV0=" type="hidden"></div>
-      <?php if ($dados_pro == 0) { ?>
-        <div class="col-lg-12">
-          <input type="hidden" name="novo_perfil_pro" id="novo_perfil_pro" value="T">
-          <label class="control-label"><label>Foto</label></label><br>
-          <img id="foto_salva" class="img-circle" width="304" height="236" src="<?php echo base_url()?>/logos/1.jpg">
-          <input class="form-control" id="foto" name="foto" type="file" accept=".gif,.jpg,.png"><br>
-        </div> 
-        <div class="col-lg-12">
-          <label class="control-label"><label>Especialidade</label></label>
-          <select required class="form-control" id="especialidade" name="especialidade">
-            <option value="">Selecione...</option>
-            <option value="DP">Depêndencia Quimica</option>
+      <div id="mensagemimg"></div>
+      <?php if ($dados_pro == 0) { ?><!-- Adicionar novo perfil -->
+      <div class="col-lg-12">
+        <input type="hidden" name="novo_perfil_pro" id="novo_perfil_pro" value="T">
+        <label class="control-label"><label>Foto</label></label><br>
+        <input class="form-control" id="foto" name="foto" type="file" accept=".gif,.jpg,.png"><br>
+      </div> 
+      <div class="col-lg-12">
+        <label class="control-label"><label>Especialidade</label></label>
+        <select required class="form-control" id="especialidade" name="especialidade">
+          <option value="">Selecione...</option>
+          <option value="DP">Depêndencia Quimica</option>
+          <option value="DE">Dependência Emocional</option>
+        </select>
+      </div> 
+      <div class="col-lg-12"><br>
+        <label class="control-label"><label>Experiência</label></label><br>
+        <textarea class="form-control" style="resize: none" id="experiencia" name="experiencia" rows="6" cols="50"></textarea><br>
+        <input class="btn btn-success" name="commit" value="Salvar" type="submit" >
+      </div> 
+
+      <?php }else { ?> <!-- Editar perfil -->
+      <div class="col-lg-12">
+        <input type="hidden" name="novo_perfil_pro" id="novo_perfil_pro" value="F">
+        <label class="control-label"><label>Foto</label></label><br>
+        <img alt="<?php echo $this->session->userdata('foto') ?>" id="foto_salva" class="img-circle" width="304" height="236" src="<?php echo base_url()?>/logos/<?php echo $this->session->userdata('foto');?>">
+        <input class="form-control" id="foto" name="foto" type="file" accept=".gif,.jpg,.png"><br>
+      </div> 
+      <div class="col-lg-12">
+        <label class="control-label"><label>Especialidade</label></label>
+        <select required class="form-control" id="especialidade" name="especialidade"> 
+          <?php if ($dados_pro['especialidade'] == 'DQ'){ ?>
+            <option selected value="DP">Depêndencia Quimica</option>
             <option value="DE">Dependência Emocional</option>
-          </select>
-        </div> 
-        <div class="col-lg-12"><br>
-          <label class="control-label"><label>Experiência</label></label><br>
-          <textarea class="form-control" style="resize: none" id="experiencia" name="experiencia" rows="6" cols="50"></textarea><br>
-          <input class="btn btn-success" name="commit" value="Salvar" type="submit" >
-        </div> 
+          <?php }else { ?>
+            <option value="DP">Dependência Quimica</option>
+            <option selected value="DE">Depêndencia Emocional</option>
+          <?php } ?>
+        </select>
+      </div> 
+      <div class="col-lg-12"><br>
+        <label class="control-label"><label>Experiência</label></label><br>
+        <textarea class="form-control" style="resize: none" name="experiencia" id="experiencia" rows="6" cols="50"><?php echo $dados_pro['experiencia']; ?></textarea><br>
+        <input class="btn btn-success" name="commit" value="Salvar" type="submit" >
+      </div>
+    <?php } ?> 
+  </form>
+</div>   
+</div>
 
-      <?php }else { ?>
-        <div class="col-lg-12">
-          <input type="hidden" name="novo_perfil_pro" id="novo_perfil_pro" value="F">
-          <label class="control-label"><label>Foto</label></label><br>
-          <img alt="<?php echo $dados_pro['foto'] ?>" id="foto_salva" class="img-circle" width="304" height="236" src="<?php echo base_url()?>/logos/<?php echo $dados_pro['foto'];?>">
-          <input class="form-control" id="foto" name="foto" type="file" accept=".gif,.jpg,.png"><br>
-        </div> 
-        <div class="col-lg-12">
-          <label class="control-label"><label>Especialidade</label></label>
-          <select required class="form-control" id="especialidade" name="especialidade"> 
-            <?php if ($dados_pro['especialidade'] == 'DQ'){ ?>
-              <option selected value="DP">Depêndencia Quimica</option>
-              <option value="DE">Dependência Emocional</option>
-            <?php }else { ?>
-              <option value="DP">Dependência Quimica</option>
-              <option selected value="DE">Depêndencia Emocional</option>
-            <?php } ?>
-          </select>
-        </div> 
-        <div class="col-lg-12"><br>
-          <label class="control-label"><label>Experiência</label></label><br>
-          <textarea class="form-control" style="resize: none" name="experiencia" id="experiencia" rows="6" cols="50"><?php echo $dados_pro['experiencia']; ?></textarea><br>
-          <input class="btn btn-success" name="commit" value="Salvar" type="submit" >
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="inserir_imagem_modal_logo" class="modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Editando Imagem</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-8 text-center">
+            <div id="image_demo_logo" style="width:350px; margin-top:30px"></div>
+          </div>
         </div>
-      <?php } ?> 
-    </form>
-  </div>   
-</div>
-
-
-
-</div>
-</div>
-</div>
-</div>
-</div>
+      </div>
+      <div class="modal-footer"><br><br>
+        <div class="col-md-10" style="padding-top:30px;">
+          <button class="btn btn-success crop_image_logo">Cortar e Enviar</button>
+        </div>
+        <div class="col-md-2" style="padding-top:30px;">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        </div>  
+      </div>
+    </div>
+  </div>
 </div>
 
 
