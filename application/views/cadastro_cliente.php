@@ -256,7 +256,7 @@ $estadosBrasileiros = array(
 <div class="form-group">   
     <div class="col-lg-8">
      <label class="control-label"><label for="cliente_email">Email</label></label>
-     <input required class="form-control" id="cliente_email" name="cliente_email" type="text" placeholder="exemplo@exemplo.com"> 
+     <input required class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" id="cliente_email" name="cliente_email" type="text" placeholder="exemplo@exemplo.com"> 
  </div>  
 </div>     
 <div class="form-group"> 

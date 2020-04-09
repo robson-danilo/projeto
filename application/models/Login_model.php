@@ -126,6 +126,24 @@ class Login_model extends CI_Model
 		$dados = $this->db->get();
 		return $dados->row_array();
 	}
-	
+
+	public function buscar_conversa($dados=null){
+		$this->db->select('*');
+		$this->db->from('conversas');
+		$this->db->where('id_enviou', $dados['id_medico']);
+		$this->db->where('id_recebeu', $dados['id_paciente']);
+		$this->db->or_where('id_recebeu', $dados['id_medico']);
+		$this->db->where('id_enviou', $dados['id_paciente']);
+		$dados =  $this->db->get();
+		return $dados->result_array();
+	}
+
+	public function enviar_conversa($dados=null){
+		$this->db->set('id_enviou', $dados['id_enviou']);
+		$this->db->set('id_recebeu', $dados['id_enviado']);
+		$this->db->set('conversa', $dados['mensagem']);
+		return $this->db->insert('conversas');
+	}
+
 	
 }

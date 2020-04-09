@@ -1,5 +1,5 @@
 <?php 
-
+$id_usuario = $this->session->userdata('id');
 ?>
 <html lang="pt-br">
 <head>
@@ -34,15 +34,10 @@
   <!-- Croppie -->
   <script src="/template/2.0/vendors/cropper/dist/croppie.js"></script>
 
+
   <script type="text/javascript">
 
     $(document).ready(function(){
-      ajaxlistar();
-    });
-
-
-    document.addEventListener('keydown', function (event) {
-      if (event.keyCode !== 13) return;
       ajaxlistar();
     });
 
@@ -52,8 +47,6 @@
       $('#divListar').append('<i class="fa fa-spinner fa-spin"></i>Carregando dados...');
       var especialidade = $('#especialidade').val();
       var nome = $('#nome').val();
-      console.log(especialidade);
-
       $.ajax({
         url: "<?php echo site_url()?>/welcome/AjaxListarProfissional",
         dataType: 'json',
@@ -62,8 +55,6 @@
         cache: false,
         success: function(data){
           var event_data = '';
-          console.log(data);
-
           $.each(data, function(index, value){
             event_data += '<div class="col-md-4 col-sm-4 col-xs-12 contido profile_details">';
             event_data += '<div class="well profile_view">';
@@ -90,9 +81,9 @@
             event_data += '<div class="col-xs-12 bottom text-center">';           
             event_data += '<div class="col-xs-12 col-sm-6 emphasis" style="float:right">';
 
-            event_data += '<a href=""><button title="Editar Funcionário" type="button" class="btn btn-primary btn-xs">';
-            event_data += '<i class="fa fa-user"></i> Editar';
-            event_data += '</button></a>';
+            event_data += '<button title="Conversa Funcionário" onclick="definir_medico('+value.id_usuario+')" type="button" class="btn btn-primary btn-xs">';
+            event_data += '<i class="fa fa-user"></i> Conversar';
+            event_data += '</button>';
             event_data += '</div>';
             event_data += '</div>';
             event_data += '</div>';
@@ -110,6 +101,73 @@
         }
       });
     }
+
+    function definir_medico(id_medico){
+      id_medico = id_medico;
+      event_data ='';
+      event_data += '<input type="hidden" id="id_enviado" value="'+id_medico+'">';
+      $("#confirmar_id").html('');
+      $("#confirmar_id").append(event_data);
+      chat();
+      $('#chat').modal('show');
+      setInterval(chat,3000);
+    }
+
+    
+
+    function chat(){
+      var meu_id = <?php echo $id_usuario ?>;
+      id_medico = $('#id_enviado').val();
+      $.ajax({
+        url: "<?php echo site_url()?>/welcome/AjaxListarConversa",
+        dataType: 'json',
+        type: 'get',
+        data: {id_medico:id_medico,meu_id:meu_id},
+        cache: false,
+        success: function(data){
+          event_data ='';
+          $.each(data, function(index, value){
+            if (value.id_enviou == meu_id){
+              event_data +='<p style="text-align:right;">'+value.conversa+'</p>'; 
+            }else{
+              event_data +='<p style="text-align:left;">'+value.conversa+'</p>'; 
+            }
+          });
+
+          $("#listar_conversas").html('');
+          $("#listar_conversas").append(event_data);
+          //setInterval(chat,3000);
+          //clearInterval(interval1);
+          //setInterval("chat()",3000);
+        },
+        error: function(d){
+
+        }
+      });
+      
+    }
+
+    function enviar_mensagem(){
+      var id_enviado = $('#id_enviado').val();
+      var id_enviou = <?php echo $id_usuario ?>;
+      var mensagem = $('#mensagem_enviar').val();
+      $.ajax({
+        url: "<?php echo site_url()?>/welcome/AjaxEnviarConversa",
+        dataType: 'json',
+        type: 'get',
+        data: {id_enviado:id_enviado,id_enviou:id_enviou,mensagem:mensagem},
+        cache: false,
+        success: function(data){
+          console.log(data);
+          chat();
+        },
+        error: function(d){
+
+        }
+      });
+
+    }
+
   </script>
 
 </head>
@@ -235,19 +293,47 @@
 </div>
 </div>
 </div>
+<div id="confirmar_id"></div>
+
+
+<!-- Modal chat -->
+<div class="modal fade" id="chat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Bate-Papo</h3>
+        <div id="erro_cadastramento"></div>
+        <div id="alerta_verificar"></div>
+      </div>
+      <div id="usuario" class="modal-body">
+        <div id="listar_conversas"></div> 
+      </div>
+      <div class="modal-footer">
+        <div class="col-lg-12">
+          <div class="input-group">
+            <input type="text" name="mensagem_enviar" onfocus="this.value='';" id="mensagem_enviar" placeholder="Digite sua mensagem" class="form-control" />
+            <span class="input-group-btn">
+              <input type="button" class="btn btn-success" onclick="enviar_mensagem()" value="enviar"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
 
 
-<!-- /page content -->
 
-<!-- footer content -->
-<footer>
- <div class="pull-right">
-  TESTANDO 123
-</div>
-<div class="clearfix"></div>
+  <!-- /page content -->
+
+  <!-- footer content -->
+  <footer>
+   <div class="pull-right">
+    TESTANDO 123
+  </div>
+  <div class="clearfix"></div>
 </footer>
 <!-- /footer content -->
 </div>

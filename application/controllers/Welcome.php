@@ -40,8 +40,6 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		session_destroy();
-		$this->session->set_flashdata('atualizacao_positivo','');
-		$this->session->set_flashdata('atualizacao_negativo','');
 		$this->load->view('loginViews');
 	}
 
@@ -281,5 +279,21 @@ class Welcome extends CI_Controller {
 		$dados = array_filter($retorno);
 		echo json_encode($dados,JSON_UNESCAPED_UNICODE);
 		
+	}
+
+	public function AjaxListarConversa(){
+		$dados = array('id_medico' =>$this->input->get('id_medico'),
+			'id_paciente' =>$this->input->get('meu_id'));
+		$dados = $this->login_model->buscar_conversa($dados);
+
+		echo json_encode($dados,JSON_UNESCAPED_UNICODE);
+	}
+
+	public function AjaxEnviarConversa(){
+		$dados = array('id_enviado' =>$this->input->get('id_enviado'),
+			'id_enviou' =>$this->input->get('id_enviou'),
+			'mensagem' =>$this->input->get('mensagem'));
+		$dados = $this->login_model->enviar_conversa($dados);
+		echo json_encode($dados,JSON_UNESCAPED_UNICODE);
 	}
 }
