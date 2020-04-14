@@ -358,7 +358,7 @@ $estadosBrasileiros = array(
 <!-- footer content -->
 <footer>
  <div class="pull-right">
-  TESTANDO 123
+  <h6><i class="fa fa-registered"></i> Desenvolvido por Robson Danilo Peres Coelho</h6>
 </div>
 <div class="clearfix"></div>
 </footer>

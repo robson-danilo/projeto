@@ -127,7 +127,7 @@ $estadosBrasileiros = array(
                         <!-- menu profile quick info -->
                         <div class="profile clearfix">
                           <div class="profile_pic text-center">
-                           <img src="<?php echo base_url()."/logos/teste.png";?>" class="img-circle profile_img">
+                           <img src="<?php echo base_url()."imagens/centro.jpeg";?>" class="img-circle profile_img">
                        </div>
                        <div class="profile_info">             
                            Usuario		  
@@ -158,7 +158,7 @@ $estadosBrasileiros = array(
         <ul class="nav navbar-nav navbar-right">
             <li class="">
              <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <span class="fa fa-user"></span> CLIENTE
+              <span class="fa fa-user"></span> Úsuario
               <span class="fa fa-angle-down"></span>
           </a>
           <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -167,13 +167,13 @@ $estadosBrasileiros = array(
                <div class="text-center">
                 <a>
                  <i class="fa fa-male"></i>
-                 <strong>TESTE</strong>									
+                 <strong>Cadastrando</strong>									
              </a>
          </div>
      </li>					
      <li class="divider"></li>						
 
-     <li><a href="<?php echo site_url('login/logout'); ?>"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
+     <li><a href="<?php echo site_url('welcome/index'); ?>"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
  </ul>
 </li>
 </ul>
@@ -189,7 +189,7 @@ $estadosBrasileiros = array(
    <p><h1>Centro Solidario</h1></p>
 
    <div class="title_left">
-    <p><h4>Cadastro</h4></p>
+    <p><h4>Cadastramento</h4></p>
 </div>
 
 </div>
@@ -341,7 +341,7 @@ $estadosBrasileiros = array(
 <!-- footer content -->
 <footer>
  <div class="pull-right">
-  TESTANDO 123
+  <h6><i class="fa fa-registered"></i> Desenvolvido por Robson Danilo Peres Coelho</h6>
 </div>
 <div class="clearfix"></div>
 </footer>

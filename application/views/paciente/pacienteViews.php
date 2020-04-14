@@ -1,5 +1,5 @@
 <?php 
-  
+
 ?>
 <html lang="pt-br">
 <head>
@@ -118,7 +118,7 @@
    <p><h1>Centro Solidario</h1></p>
 
    <div class="title_left">
-    <p><h4>Perfil Profissional</h4></p>
+    <p><h4></h4></p>
   </div>
 
 </div>
@@ -131,15 +131,17 @@
 
     <div id="tudo">  
 
+      <div class="profile_pic text-center">
+        <img src="<?php echo base_url()?>imagens/centro.jpeg" height="300">
+     </div>
 
 
 
-
-    </div>
-
+   </div>
 
 
-  </div>
+
+ </div>
 </div>
 </div>
 </div>
@@ -155,7 +157,7 @@
 <!-- footer content -->
 <footer>
  <div class="pull-right">
-  TESTANDO 123
+  <h6><i class="fa fa-registered"></i> Desenvolvido por Robson Danilo Peres Coelho</h6>
 </div>
 <div class="clearfix"></div>
 </footer>

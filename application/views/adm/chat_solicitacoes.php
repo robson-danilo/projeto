@@ -1,17 +1,18 @@
 <?php 
+
 $id_usuario = $this->session->userdata('id');
 ?>
 <html lang="pt-br">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <!-- Meta, title, CSS, favicons, etc. -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- Meta, title, CSS, favicons, etc. -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="shortcut icon" href="<?php echo site_url('imagens/teste.jpg')?>"/>
+	<link rel="shortcut icon" href="<?php echo site_url('imagens/teste.jpg')?>"/>
 
-  <title>Teste Template</title>
+	<title>Teste Template</title>
 
   <!-- Bootstrap -->
   <link href="/template/2.0/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -34,26 +35,19 @@ $id_usuario = $this->session->userdata('id');
   <!-- Croppie -->
   <script src="/template/2.0/vendors/cropper/dist/croppie.js"></script>
 
-
   <script type="text/javascript">
-
-    $(document).ready(function(){
-      ajaxlistar();
-    });
-
 
     function ajaxlistar(){
       $('#divListar').html('');                     
       $('#divListar').append('<i class="fa fa-spinner fa-spin"></i>Carregando dados...');
-      var especialidade = $('#especialidade').val();
-      var nome = $('#nome').val();
       $.ajax({
-        url: "<?php echo site_url()?>/welcome/AjaxListarProfissional",
+        url: "<?php echo site_url()?>/welcome/AjaxListarSolicitacoes",
         dataType: 'json',
         type: 'get',
-        data: {especialidade:especialidade,nome:nome},
+        data: {},
         cache: false,
         success: function(data){
+          console.log(data);
           var event_data = '';
           $.each(data, function(index, value){
             event_data += '<div class="col-md-4 col-sm-4 col-xs-12 contido profile_details">';
@@ -65,23 +59,19 @@ $id_usuario = $this->session->userdata('id');
               event_data += '<h4 style="max-width: 34ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="'+value.nome+'" class="brief"><i>'+value.nome+'</i></h4>';
             }
             event_data += '<div class="left col-xs-7">';
-            if (value.especialidade == 'DP'){
-              event_data += '<p title="Especialidade: Depêndencia Quimica"><i class="fa fa-briefcase"></i>Especialidade: Depêndencia Quimica</p>';
-            }else {
-              event_data += '<p title="Especialidade: Depêndencia Emocional"><i class="fa fa-briefcase"></i>Especialidade: Depêndencia Emocional</p>';
-            }
-            event_data += '<p style="max-width: 34ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="Experiência: '+value.experiencia+'"><i class="fa fa-briefcase"></i>Experiência: '+value.experiencia+'</p>';
+
+            event_data += '<p style="max-width: 34ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="Sexo: '+value.sexo+'"><i class="fa fa-briefcase"></i>Sexo: '+value.sexo+'</p>';
             event_data += '</div>';
 
             event_data += '<div class="right col-xs-5 text-center">';
-            event_data += '<img src="<?php echo base_url()."logos/'+value.foto+'";?>" alt="" class="img-circle img-responsive">';
+            event_data += '<img src="<?php echo base_url()."imagens/centro.jpeg";?>" alt="" class="img-circle img-responsive">';
             event_data += '</div>';
 
             event_data += '</div>';
             event_data += '<div class="col-xs-12 bottom text-center">';           
             event_data += '<div class="col-xs-12 col-sm-6 emphasis" style="float:right">';
 
-            event_data += '<button title="Conversa Funcionário" onclick="definir_medico('+value.id_usuario+')" type="button" class="btn btn-primary btn-xs">';
+            event_data += '<button title="Conversa Funcionário" onclick="definir('+value.id+')" type="button" class="btn btn-primary btn-xs">';
             event_data += '<i class="fa fa-user"></i> Conversar';
             event_data += '</button>';
             event_data += '</div>';
@@ -102,18 +92,18 @@ $id_usuario = $this->session->userdata('id');
       });
     }
 
-    function definir_medico(id_medico){
-      id_medico = id_medico;
+
+
+    function definir(id){
+      id = id;
       event_data ='';
-      event_data += '<input type="hidden" id="id_enviado" value="'+id_medico+'">';
+      event_data += '<input type="hidden" id="id_enviado" value="'+id+'">';
       $("#confirmar_id").html('');
       $("#confirmar_id").append(event_data);
       chat();
       $('#chat').modal('show');
       setInterval(chat,3000);
     }
-
-    
 
     function chat(){
       var meu_id = <?php echo $id_usuario ?>;
@@ -168,6 +158,9 @@ $id_usuario = $this->session->userdata('id');
 
     }
 
+
+
+
   </script>
 
 </head>
@@ -178,7 +171,7 @@ $id_usuario = $this->session->userdata('id');
    <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
      <div class="navbar nav_title" style="border: 0;">
-      <a href="#" class="site_title"><i class="fa fa-smile-o"></i> <span>Cadastro</span></a>
+      <a href="#" class="site_title"><i class="fa fa-smile-o"></i> <span>SOLIDARIO</span></a>
     </div>
 
     <div class="clearfix"></div>
@@ -186,10 +179,10 @@ $id_usuario = $this->session->userdata('id');
     <!-- menu profile quick info -->
     <div class="profile clearfix">
       <div class="profile_pic text-center">
-       <img src="<?php echo base_url()."logos/teste.jpg";?>" height="60" class="img-circle profile_img">
+       <img src="<?php echo base_url()?>/logos/<?php echo $this->session->userdata('foto');?>" height="60" class="img-circle profile_img">
      </div>
      <div class="profile_info">             
-       Usuario        
+       Usuario		  
      </div>
      <div class="clearfix"></div>
    </div>
@@ -197,45 +190,46 @@ $id_usuario = $this->session->userdata('id');
    <!-- sidebar menu -->
    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
     <div class="menu_section">
-     <ul class="nav side-menu">            
-      <li><a href="<?php echo site_url('welcome/editarperfil'); ?>"><i class="fa fa-registered"></i> Editar Perfil</a>
-        <li><a href="<?php echo site_url('welcome/listarProfissionaisEspecialidade');?>"><i class="fa fa-registered"></i>Listar Profissionais</a>  
-        </ul>
+     <ul class="nav side-menu">	
+       <li><a href="<?php echo site_url('welcome/editarperfil'); ?>"><i class="fa fa-registered"></i> Editar Perfil</a>       
+        <li><a href="<?php echo site_url('welcome/editarperfilprofissional'); ?>"><i class="fa fa-registered"></i> Perfil Profissional</a>
+          <li><a href="<?php echo site_url('welcome/ChatPro');?>"><i class="fa fa-registered"></i>Chat Solicitações</a>
+          </ul>
+        </div>
       </div>
+      <!-- /sidebar menu -->
     </div>
-    <!-- /sidebar menu -->
-  </div>
-</div>
-
-<!-- top navigation -->
-<div class="top_nav">
- <div class="nav_menu">
-  <nav>
-   <div class="nav toggle">
-    <a id="menu_toggle"><i class="fa fa-bars"></i></a>
   </div>
 
-  <ul class="nav navbar-nav navbar-right">
-    <li class="">
-     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-      <span class="fa fa-user"></span> <?php echo $this->session->userdata('login');?>
-      <span class="fa fa-angle-down"></span>
-    </a>
-    <ul class="dropdown-menu dropdown-usermenu pull-right">
-      <br>
-      <li>
-       <div class="text-center">
-        <a>
-         <i class="fa fa-male"></i>
-         <strong><?php echo $this->session->userdata('nome');?></strong>                                  
-       </a>
-     </div>
-   </li>                    
-   <li class="divider"></li>                        
+  <!-- top navigation -->
+  <div class="top_nav">
+   <div class="nav_menu">
+    <nav>
+     <div class="nav toggle">
+      <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+    </div>
 
-   <li><a href="<?php echo site_url('welcome/index'); ?>"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
- </ul>
-</li>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="">
+       <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+        <span class="fa fa-user"></span> <?php echo $this->session->userdata('login');?>
+        <span class="fa fa-angle-down"></span>
+      </a>
+      <ul class="dropdown-menu dropdown-usermenu pull-right">
+        <br>
+        <li>
+         <div class="text-center">
+          <a>
+           <i class="fa fa-male"></i>
+           <strong><?php echo $this->session->userdata('nome');?></strong>									
+         </a>
+       </div>
+     </li>					
+     <li class="divider"></li>						
+
+     <li><a href="<?php echo site_url('welcome/index'); ?>"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
+   </ul>
+ </li>
 </ul>
 </nav>
 </div>
@@ -249,7 +243,7 @@ $id_usuario = $this->session->userdata('id');
    <p><h1>Centro Solidario</h1></p>
 
    <div class="title_left">
-    <p><h4>Perfil Profissional</h4></p>
+    <p><h4>Chat Profissional</h4></p>
   </div>
 
 </div>
@@ -259,39 +253,48 @@ $id_usuario = $this->session->userdata('id');
  <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
    <div class="x_content">
-
     <div class="row">
       <div class="form-group">
-        <div class="col-md-6">
-         <div class="input-group" >
-          <span class="input-group-addon" id="basic-addon3">Nome</span>
-          <input type="text" id="nome" class="form-control" name="nome">
+        <div class="col-md-2">                          
+          <button type="button" class="btn btn-default" onclick="ajaxlistar()">Pesquisar</button>
         </div>
-      </div>    
-      <div class="col-md-4">
-       <div class="input-group" >
-        <span class="input-group-addon" id="basic-addon3">Especialidade</span>
-        <select class="form-control" id="especialidade" name="especialidade">
-          <option selected="selected" disabled>Selecione...</option>
-          <option value="DP">Depêndencia Quimica</option>
-          <option value="DE">Dependência Emocional</option>              
-        </select>
       </div>
-    </div> 
-
-    <div class="col-md-2">                          
-      <button type="button" class="btn btn-default" onclick="ajaxlistar()">Pesquisar</button>
+    </div>
+  </div><br><br><br><br>
+  <div class="row">       
+    <div id="divListar"></div>
+  </div>  
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="inserir_imagem_modal_logo" class="modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Editando Imagem</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-8 text-center">
+            <div id="image_demo_logo" style="width:350px; margin-top:30px"></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer"><br><br>
+        <div class="col-md-10" style="padding-top:30px;">
+          <button class="btn btn-success crop_image_logo">Cortar e Enviar</button>
+        </div>
+        <div class="col-md-2" style="padding-top:30px;">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        </div>  
+      </div>
     </div>
   </div>
-</div>
-</div><br><br><br><br>
-<div class="row">       
-  <div id="divListar"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div id="confirmar_id"></div>
 
@@ -320,10 +323,6 @@ $id_usuario = $this->session->userdata('id');
       </div>
     </div>
   </div>
-
-
-
-
 
 
   <!-- /page content -->

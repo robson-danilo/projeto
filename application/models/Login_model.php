@@ -130,10 +130,10 @@ class Login_model extends CI_Model
 	public function buscar_conversa($dados=null){
 		$this->db->select('*');
 		$this->db->from('conversas');
-		$this->db->where('id_enviou', $dados['id_medico']);
-		$this->db->where('id_recebeu', $dados['id_paciente']);
-		$this->db->or_where('id_recebeu', $dados['id_medico']);
-		$this->db->where('id_enviou', $dados['id_paciente']);
+		$this->db->where('id_enviou', $dados['outro_id']);
+		$this->db->where('id_recebeu', $dados['meu_id']);
+		$this->db->or_where('id_recebeu', $dados['outro_id']);
+		$this->db->where('id_enviou', $dados['meu_id']);
 		$dados =  $this->db->get();
 		return $dados->result_array();
 	}
@@ -145,5 +145,21 @@ class Login_model extends CI_Model
 		return $this->db->insert('conversas');
 	}
 
+	public function listarpacientes($id=null){
+		$this->db->select('DISTINCT(id_enviou)');
+		$this->db->from('conversas');
+		$this->db->where('id_recebeu', $id);
+		$dados = $this->db->get();
+		return $dados->result_array();
+	}
+
+	public function buscardadospaciente($dados=null){
+		$this->db->select('*');
+		$this->db->from('usuario');
+		$this->db->where_in('id', $dados);
+		$this->db->where('tipo_usuario_id', '2');
+		$dados = $this->db->get();
+		return $dados->result_array();
+	}
 	
 }

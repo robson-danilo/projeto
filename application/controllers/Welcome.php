@@ -282,8 +282,8 @@ class Welcome extends CI_Controller {
 	}
 
 	public function AjaxListarConversa(){
-		$dados = array('id_medico' =>$this->input->get('id_medico'),
-			'id_paciente' =>$this->input->get('meu_id'));
+		$dados = array('outro_id' =>$this->input->get('outro_id'),
+			'meu_id' =>$this->input->get('meu_id'));
 		$dados = $this->login_model->buscar_conversa($dados);
 
 		echo json_encode($dados,JSON_UNESCAPED_UNICODE);
@@ -295,5 +295,24 @@ class Welcome extends CI_Controller {
 			'mensagem' =>$this->input->get('mensagem'));
 		$dados = $this->login_model->enviar_conversa($dados);
 		echo json_encode($dados,JSON_UNESCAPED_UNICODE);
+	}
+
+	public function ChatPro(){
+		$this->load->view('adm/chat_solicitacoes');
+
+	}
+
+	public function AjaxListarSolicitacoes(){
+		$ids = $this->login_model->listarpacientes($this->session->userdata('id'));
+		//print_r($dados);exit;
+		foreach ($ids as $key => $value) {
+			foreach ($value as $key2 => $value2) {
+				$dados[] = $value2;
+			}
+		}
+		$dados_pacientes = $this->login_model->buscardadospaciente($dados);
+		//print_r($dados_pacientes);exit;
+
+		echo json_encode($dados_pacientes,JSON_UNESCAPED_UNICODE);
 	}
 }

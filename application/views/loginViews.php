@@ -27,9 +27,11 @@
 
 </head>
 
+
 <body class="login">
   <div class="login_wrapper">
     <div class="animate form login_form"> 
+      <div style="position:relative;left:-15%;"><img src="<?php echo base_url()?>imagens/centro.jpeg" class="displayed" height="300"></div>
       <section class="login_content">
         <?php 
         echo validation_errors('<p><font color="#FF0000">','</p>');
@@ -54,7 +56,7 @@
           <a class="btn btn-success" href="<?php echo site_url("welcome/CadastrarCliente");?>">Cadastrar</a>
           
           <div>
-            <h1><i class="fa fa-smile-o"></i> Solidario</h1>
+            <h1><i class="fa fa-smile-o"></i> CS</h1>
             <p>Desenvolvido por Robson Danilo Peres Coelho</a></p>
           </div>
         </form>

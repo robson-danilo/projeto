@@ -141,7 +141,7 @@ $estadosBrasileiros = array(
                <ul class="nav side-menu">        
                 <li><a href="<?php echo site_url('welcome/editarperfil'); ?>"><i class="fa fa-registered"></i> Editar Perfil</a>       
                   <li><a href="<?php echo site_url('welcome/editarperfilprofissional'); ?>"><i class="fa fa-registered"></i> Perfil Profissional</a>
-                    <li><a href="<?php echo site_url('welcome/CadastrarCliente');?>"><i class="fa fa-registered"></i>Chat Solicitações</a>   
+                    <li><a href="<?php echo site_url('welcome/ChatPro');?>"><i class="fa fa-registered"></i>Chat Solicitações</a>   
                     </ul>
                   </div>
                 </div>
@@ -359,7 +359,7 @@ $estadosBrasileiros = array(
 <!-- footer content -->
 <footer>
  <div class="pull-right">
-  TESTANDO 123
+  <h6><i class="fa fa-registered"></i> Desenvolvido por Robson Danilo Peres Coelho</h6>
 </div>
 <div class="clearfix"></div>
 </footer>

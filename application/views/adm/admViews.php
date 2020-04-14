@@ -151,7 +151,7 @@ $login = $this->session->userdata('login');
      <ul class="nav side-menu">	
        <li><a href="<?php echo site_url('welcome/editarperfil'); ?>"><i class="fa fa-registered"></i> Editar Perfil</a>       
         <li><a href="<?php echo site_url('welcome/editarperfilprofissional'); ?>"><i class="fa fa-registered"></i> Perfil Profissional</a>
-          <li><a href="<?php echo site_url('welcome/CadastrarCliente');?>"><i class="fa fa-registered"></i>Chat Solicitações</a>
+          <li><a href="<?php echo site_url('welcome/ChatPro');?>"><i class="fa fa-registered"></i>Chat Solicitações</a>
           </ul>
         </div>
       </div>
@@ -255,7 +255,7 @@ $login = $this->session->userdata('login');
       <div class="col-lg-12">
         <label class="control-label"><label>Especialidade</label></label>
         <select required class="form-control" id="especialidade" name="especialidade"> 
-          <?php if ($dados_pro['especialidade'] == 'DQ'){ ?>
+          <?php if ($dados_pro['especialidade'] == 'DP'){ ?>
             <option selected value="DP">Depêndencia Quimica</option>
             <option value="DE">Dependência Emocional</option>
           <?php }else { ?>
@@ -315,7 +315,7 @@ $login = $this->session->userdata('login');
 <!-- footer content -->
 <footer>
  <div class="pull-right">
-  TESTANDO 123
+  <h6><i class="fa fa-registered"></i> Desenvolvido por Robson Danilo Peres Coelho</h6>
 </div>
 <div class="clearfix"></div>
 </footer>
