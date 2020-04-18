@@ -134,6 +134,8 @@ class Login_model extends CI_Model
 		$this->db->where('id_recebeu', $dados['meu_id']);
 		$this->db->or_where('id_recebeu', $dados['outro_id']);
 		$this->db->where('id_enviou', $dados['meu_id']);
+		$this->db->order_by('data_e_hora', 'desc');
+		$this->db->limit('7');
 		$dados =  $this->db->get();
 		return $dados->result_array();
 	}
@@ -160,6 +162,14 @@ class Login_model extends CI_Model
 		$this->db->where('tipo_usuario_id', '2');
 		$dados = $this->db->get();
 		return $dados->result_array();
+	}
+
+	public function buscar_imagem($id=null){
+		$this->db->select('foto');
+		$this->db->from('perfil_profissional');
+		$this->db->where('id_usuario', $id);
+		$dados = $this->db->get();
+		return $dados->row_array();
 	}
 	
 }

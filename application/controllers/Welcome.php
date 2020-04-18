@@ -284,7 +284,11 @@ class Welcome extends CI_Controller {
 	public function AjaxListarConversa(){
 		$dados = array('outro_id' =>$this->input->get('outro_id'),
 			'meu_id' =>$this->input->get('meu_id'));
-		$dados = $this->login_model->buscar_conversa($dados);
+		$dados['dados'] = $this->login_model->buscar_conversa($dados);
+
+		if($this->input->get('id_doc')){
+			$dados['imagem'] = $this->login_model->buscar_imagem($this->input->get('id_doc'));
+		}
 
 		echo json_encode($dados,JSON_UNESCAPED_UNICODE);
 	}

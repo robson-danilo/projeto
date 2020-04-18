@@ -25,7 +25,43 @@ $id_usuario = $this->session->userdata('id');
   <!-- Croppie -->
   <link href="/template/2.0/vendors/cropper/dist/croppie.css" rel="stylesheet">
 
+  <style type="text/css">
 
+    #conversa_right{
+      background-color: #f1f1f1;
+      border-radius: 1px;
+      padding: 3px;
+      margin: 10px 0;
+    }
+
+    #conversa_left{
+      background-color: #ddd;
+      border-radius: 5px;
+      padding: 3px;
+      margin: 10px 0;
+      border-color: #ccc;
+    }
+
+    .container img {
+      float: left;
+      max-width: 60px;
+      width: 100%;
+      margin-right: 20px;
+      border-radius: 50%;
+    }
+
+    .time-right {
+      float: right;
+      color: #aaa;
+    }
+
+    /* Style time text */
+    .time-left {
+      float: left;
+      color: #999;
+    }
+
+  </style>
 
   <!-- jQuery -->
   <script src="/template/2.0/vendors/jquery/dist/jquery.js"></script> 
@@ -115,12 +151,20 @@ $id_usuario = $this->session->userdata('id');
         data: {outro_id:outro_id,meu_id:meu_id},
         cache: false,
         success: function(data){
+          console.log(data);
           event_data ='';
-          $.each(data, function(index, value){
+          $.each(data.dados, function(index, value){
             if (value.id_enviou == meu_id){
-              event_data +='<p style="text-align:right;">'+value.conversa+'</p>'; 
+              event_data +='<div id="conversa_right" class="container">';
+              event_data +='<img src="<?php echo base_url()?>/logos/<?php echo $this->session->userdata('foto');?>">';
+              event_data +='<p style="text-align: right;">'+value.conversa+'</p>';
+              event_data +='<span class="time-right">'+value.data_e_hora+'</span>';
+              event_data +='</div>';
             }else{
-              event_data +='<p style="text-align:left;">'+value.conversa+'</p>'; 
+              event_data +='<div id="conversa_left" class="container darker">';
+              event_data +='<p>'+value.conversa+'</p>';
+              event_data +='<span class="time-left">'+value.data_e_hora+'</span>';
+              event_data +='</div>';
             }
           });
 
@@ -314,7 +358,7 @@ $id_usuario = $this->session->userdata('id');
       <div class="modal-footer">
         <div class="col-lg-12">
           <div class="input-group">
-            <input type="text" name="mensagem_enviar" onfocus="this.value='';" id="mensagem_enviar" placeholder="Digite sua mensagem" class="form-control" />
+            <input type="text" name="mensagem_enviar" maxlength="120" onfocus="this.value='';" id="mensagem_enviar" placeholder="Digite sua mensagem" class="form-control" />
             <span class="input-group-btn">
               <input type="button" class="btn btn-success" onclick="enviar_mensagem()" value="enviar"></span>
             </div>
